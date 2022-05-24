@@ -48,3 +48,6 @@ void keyPressed() {
   if (MODE == 0) {
   }
 }
+
+void erase(){
+}
