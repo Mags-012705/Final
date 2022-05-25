@@ -6,6 +6,7 @@ public class Segment {
   color myColor;
   float weight;
   float frictionalCoeff;
+  Segment prev,next;
   
   Segment(int x, int y, int x2, int y2, color Color, float thickness) {
     startX = x;
@@ -19,5 +20,20 @@ public class Segment {
   
   float getCoeff() {
     return (float)this.myColor*this.weight*.001;
+  }
+  
+  int getStartX() {
+    return startX;
+  }
+  
+  int getStartY() {
+    return startY;
+  }
+  int getEndX() {
+    return endX;
+  }
+  
+  int getEndY() {
+    return endY;
   }
 }

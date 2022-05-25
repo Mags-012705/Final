@@ -21,10 +21,11 @@ void setup() {
 void draw() {
   background(255);
   if (MODE == 0) {
+    stroke(0);
     if (mousePressed == true) {
       stroke(currentCol);
       strokeWeight(curWeight);
-      Segment add = new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight);
+      //new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight);
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
   } else if (MODE == 1) {
@@ -42,6 +43,7 @@ void draw() {
   }
   fill(0);
   text(mo,20,20);
+  text("Weight: " + curWeight, 20, 30);
   
 }
 
@@ -62,7 +64,7 @@ void keyPressed() {
   }
   
   if (keyCode >= 49 && keyCode <= 57) {
-    curWeight = keyCode;
+    curWeight = keyCode - 48;
   }
 }
 
