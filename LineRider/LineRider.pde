@@ -1,5 +1,5 @@
 int MODE;
-float GRAVITY;
+final float GRAVITY = 0.98;
 float GRAVITY_ACC;
 color currentCol;
 float curWeight = 1;
