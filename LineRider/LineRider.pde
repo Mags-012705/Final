@@ -2,7 +2,8 @@ int MODE;
 float GRAVITY;
 float GRAVITY_ACC;
 color currentCol;
-Segment[] lines;
+float curWeight = 1;
+ArrayList<Segment> lines;
 int Gpoints;
 Avatar current;
 
@@ -20,8 +21,10 @@ void setup() {
 void draw() {
   background(255);
   if (MODE == 0) {
-    stroke(0);
     if (mousePressed == true) {
+      stroke(currentCol);
+      strokeWeight(curWeight);
+      Segment add = new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight);
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
   } else if (MODE == 1) {
@@ -56,6 +59,10 @@ void keyPressed() {
   }
 
   if (MODE == 0) {
+  }
+  
+  if (keyCode >= 49 && keyCode <= 57) {
+    curWeight = keyCode;
   }
 }
 

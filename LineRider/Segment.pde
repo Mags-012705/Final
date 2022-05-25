@@ -7,7 +7,7 @@ public class Segment {
   float weight;
   float frictionalCoeff;
   
-  Segment(int x, int y, int x2, int y2, color Color, int thickness) {
+  Segment(int x, int y, int x2, int y2, color Color, float thickness) {
     startX = x;
     startY = y;
     endX = x2;
