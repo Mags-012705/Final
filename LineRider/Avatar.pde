@@ -15,9 +15,17 @@ public class Avatar{
     wide = wi;
     high = hi;
     mass = 30;
+    
+    xAcceleration = 0.75;
   }
   
   public void move (){
+    x += xAcceleration;
+    y += yAcceleration;
+    
+    //Apply grav here for now (for testing)
+    
+    yAcceleration += 0.98;
   }
   
   public void friction(Segment platform){
@@ -34,6 +42,7 @@ public class Avatar{
   }
   
   public void display(){
+    ellipse(x,y,wide*2,high*2);
   }
   
 }

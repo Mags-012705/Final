@@ -14,6 +14,7 @@ public class Segment {
     endY = y2;
     myColor = Color;
     weight = thickness;
+    
   }
   
   float getCoeff() {

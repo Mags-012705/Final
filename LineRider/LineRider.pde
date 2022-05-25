@@ -4,7 +4,6 @@ float GRAVITY_ACC;
 color currentCol;
 Segment[] lines;
 int Gpoints;
-boolean avaThere;
 Avatar current;
 
 /*
@@ -14,24 +13,35 @@ Avatar current;
 
 void setup() {
   size(1000, 1000);
-  background(255);
-  avaThere = false;
-  current = new Avatar(20, 20, 5, 5);
+  current = new Avatar(40, 40, 5, 5);
+  currentCol = 255;
 }
 
 void draw() {
+  background(255);
   if (MODE == 0) {
     stroke(0);
     if (mousePressed == true) {
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
   } else if (MODE == 1) {
+    current.move();
     current.display();
   }
+  
+  String mo = "Mode : ";
+  if (MODE == 0){
+    mo += "Draw Mode";
+  }else if (MODE == 1){
+    mo += "Playing";
+  }else if (MODE == 2){
+    mo += "Erase Mode";
+  }
+  fill(0);
+  text(mo,20,20);
+  
 }
 
-void display() {
-}
 
 void keyPressed() {
   if (key == ' ') {
@@ -40,8 +50,8 @@ void keyPressed() {
     } else {
       MODE++;
     }
-    if (MODE != 1) {
-      avaThere = false;
+    if (MODE == 1){
+      current = new Avatar(40, 40, 5, 5);
     }
   }
 
