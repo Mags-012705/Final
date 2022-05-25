@@ -14,7 +14,7 @@ Avatar current;
 
 void setup() {
   size(1000, 1000);
-  current = new Avatar(40, 40, 5, 5);
+  //current = new Avatar(40, 40, 5, 5);
   currentCol = 255;
 }
 
@@ -25,26 +25,25 @@ void draw() {
     if (mousePressed == true) {
       stroke(currentCol);
       strokeWeight(curWeight);
-      //new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight);
-      line(mouseX, mouseY, pmouseX, pmouseY);
+      lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
+      lines.display();
     }
   } else if (MODE == 1) {
     current.move();
     current.display();
   }
-  
+
   String mo = "Mode : ";
-  if (MODE == 0){
+  if (MODE == 0) {
     mo += "Draw Mode";
-  }else if (MODE == 1){
+  } else if (MODE == 1) {
     mo += "Playing";
-  }else if (MODE == 2){
+  } else if (MODE == 2) {
     mo += "Erase Mode";
   }
   fill(0);
-  text(mo,20,20);
+  text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  
 }
 
 
@@ -55,18 +54,18 @@ void keyPressed() {
     } else {
       MODE++;
     }
-    if (MODE == 1){
+    if (MODE == 1) {
       current = new Avatar(40, 40, 5, 5);
     }
   }
 
   if (MODE == 0) {
   }
-  
+
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
 }
 
-void erase(){
+void erase() {
 }

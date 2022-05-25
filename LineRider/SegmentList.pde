@@ -6,6 +6,8 @@ public class SegmentList {
     size = 0;
     start = new Segment(0,0,0,0,0,1);
     end = new Segment(0,0,0,0,0,1);
+    start.next = end;
+    end.prev = start;
   }
   
   void add(Segment x) {
