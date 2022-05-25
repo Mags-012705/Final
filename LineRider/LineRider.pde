@@ -3,7 +3,7 @@ float GRAVITY;
 float GRAVITY_ACC;
 color currentCol;
 float curWeight = 1;
-ArrayList<Segment> lines;
+SegmentList lines;
 int Gpoints;
 Avatar current;
 
