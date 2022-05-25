@@ -36,4 +36,9 @@ public class Segment {
   int getEndY() {
     return endY;
   }
+  
+  void display() {
+    stroke(myColor);
+    line(this.startX, this.startY, this.endX, this.endY);
+  }
 }

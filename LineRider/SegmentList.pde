@@ -16,6 +16,10 @@ public class SegmentList {
   }
   
   void display() {
-    
+    Segment current = start;
+    while (current != null) {
+      current.display();
+      current = current.next;
+    }
   }
 }
