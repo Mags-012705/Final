@@ -4,21 +4,24 @@ public class SegmentList {
   
   SegmentList() {
     size = 0;
+    start = new Segment(0,0,0,0,0,1);
+    end = new Segment(0,0,0,0,0,1);
+    start.next = end;
+    end.prev = start;
   }
   
   void add(Segment x) {
-    if (size == 0) {
-      start = x;
-      end = x;
-    } else {
-      end = x;
-    }
+    x.prev = end.prev;
+    x.next = end;
+    end.prev.next = x;
+    end.prev = x;
   }
   
-  //void display() {
-    
-  //   {
-  //    line(s.getStartX(),s.getStartY(),s.getEndX(),s.getEndY());
-  //  }
-  //}
+  void display() {
+    Segment current = start;
+    while (current != null) {
+      current.display();
+      current = current.next;
+    }
+  }
 }

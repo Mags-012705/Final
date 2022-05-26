@@ -2,8 +2,8 @@ int MODE;
 final float GRAVITY = 0.98;
 float GRAVITY_ACC;
 color currentCol;
-float curWeight = 1;
-ArrayList<Segment> lines;
+float curWeight;
+SegmentList lines;
 int Gpoints;
 Avatar current;
 
@@ -14,37 +14,36 @@ Avatar current;
 
 void setup() {
   size(1000, 1000);
+  background(255);
   current = new Avatar(40, 40, 5, 5);
-  currentCol = 255;
+  currentCol = 0;
+  curWeight = 1;
+  lines = new SegmentList();
 }
 
 void draw() {
-  background(255);
+  //background(255);
   if (MODE == 0) {
-    stroke(0);
     if (mousePressed == true) {
-      stroke(currentCol);
-      strokeWeight(curWeight);
-      //new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight);
-      line(mouseX, mouseY, pmouseX, pmouseY);
+      lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
+    lines.display();
   } else if (MODE == 1) {
     current.move();
     current.display();
   }
-  
+
   String mo = "Mode : ";
-  if (MODE == 0){
+  if (MODE == 0) {
     mo += "Draw Mode";
-  }else if (MODE == 1){
+  } else if (MODE == 1) {
     mo += "Playing";
-  }else if (MODE == 2){
+  } else if (MODE == 2) {
     mo += "Erase Mode";
   }
   fill(0);
-  text(mo,20,20);
+  text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  
 }
 
 
@@ -55,18 +54,18 @@ void keyPressed() {
     } else {
       MODE++;
     }
-    if (MODE == 1){
+    if (MODE == 1) {
       current = new Avatar(40, 40, 5, 5);
     }
   }
 
   if (MODE == 0) {
   }
-  
+
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
 }
 
-void erase(){
+void erase() {
 }
