@@ -1,6 +1,4 @@
 public class Avatar{
-  float xVelocity;
-  float yVelocity;
   float mass;
   float xAcceleration;
   float yAcceleration;
@@ -9,15 +7,19 @@ public class Avatar{
   float x;
   float y;
   float angle;
+  float normalForce;
+  float force;
   
   public Avatar(float xcor, float ycor, float wi, float hi){
     x = xcor;
     y = ycor;
     wide = wi;
     high = hi;
-    mass = 30;
+    mass = 10;
     
     xAcceleration = 0.75;
+    force = mass * xAcceleration;
+    normalForce = mass * yAcceleration;
   }
   
   public void move (){
@@ -30,24 +32,27 @@ public class Avatar{
   }
   
   public void friction(Segment platform){
-    if (platform.startX == platform.endX){
-      float force = mass * GRAVITY;
-    }
+    float frictionF = platform.getCoeff() * normalForce;
+    force -= frictionF;
+    xAcceleration = force/mass;
   }
   
-  public void gravity(){
-  }
   
   public void airResistance(){
   }
+
   
-  public int getForce(){
-    return 0;
-  }
-  
-  private void calcAngle(Segment platform){
+  private void calcNormAng(Segment platform){
     if (platform.startY != platform.endY){
       angle = atan(platform.getSlope());
+      if (platform.startY > this.y || platform.endY > this.y){
+        normalForce = (mass*GRAVITY) - (force * sin(angle));
+      }else{
+        normalForce = (mass * GRAVITY) + (force * sin(angle));
+      }
+    }else{
+      angle = 0;
+      normalForce = mass * xAcceleration;
     }
   }
     

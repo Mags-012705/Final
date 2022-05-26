@@ -22,16 +22,16 @@ void setup() {
 }
 
 void draw() {
-  //background(255);
+  background(255);
   if (MODE == 0) {
     if (mousePressed == true) {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
-    lines.display();
   } else if (MODE == 1) {
     current.move();
     current.display();
   }
+  lines.display();
 
   String mo = "Mode : ";
   if (MODE == 0) {
