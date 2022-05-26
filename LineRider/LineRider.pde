@@ -2,7 +2,7 @@ int MODE;
 float GRAVITY;
 float GRAVITY_ACC;
 color currentCol;
-float curWeight = 1;
+float curWeight;
 SegmentList lines;
 int Gpoints;
 Avatar current;
@@ -14,8 +14,10 @@ Avatar current;
 
 void setup() {
   size(1000, 1000);
+  background(255);
   current = new Avatar(40, 40, 5, 5);
-  currentCol = 255;
+  currentCol = 0;
+  curWeight = 1;
   lines = new SegmentList();
 }
 
