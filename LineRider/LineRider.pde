@@ -14,21 +14,18 @@ Avatar current;
 
 void setup() {
   size(1000, 1000);
-  //current = new Avatar(40, 40, 5, 5);
+  current = new Avatar(40, 40, 5, 5);
   currentCol = 255;
   lines = new SegmentList();
 }
 
 void draw() {
-  background(255);
+  //background(255);
   if (MODE == 0) {
-    stroke(0);
     if (mousePressed == true) {
-      stroke(currentCol);
-      strokeWeight(curWeight);
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
-      lines.display();
     }
+    lines.display();
   } else if (MODE == 1) {
     current.move();
     current.display();

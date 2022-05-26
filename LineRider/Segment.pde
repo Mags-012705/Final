@@ -39,6 +39,7 @@ public class Segment {
   
   void display() {
     stroke(myColor);
-    line(this.startX, this.startY, this.endX, this.endY);
+    strokeWeight(weight);
+    line(startX, startY, endX, endY);
   }
 }
