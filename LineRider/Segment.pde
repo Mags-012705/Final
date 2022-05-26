@@ -36,4 +36,10 @@ public class Segment {
   int getEndY() {
     return endY;
   }
+  
+  void display() {
+    stroke(myColor);
+    strokeWeight(weight);
+    line(startX, startY, endX, endY);
+  }
 }

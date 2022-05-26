@@ -8,6 +8,7 @@ public class Avatar{
   float high;
   float x;
   float y;
+  float angle;
   
   public Avatar(float xcor, float ycor, float wi, float hi){
     x = xcor;
@@ -25,10 +26,13 @@ public class Avatar{
     
     //Apply grav here for now (for testing)
     
-    yAcceleration += 0.98;
+    yAcceleration += GRAVITY;
   }
   
   public void friction(Segment platform){
+    if (platform.startX == platform.endX){
+      float force = mass * GRAVITY;
+    }
   }
   
   public void gravity(){
@@ -40,6 +44,13 @@ public class Avatar{
   public int getForce(){
     return 0;
   }
+  
+  private void calcAngle(Segment platform){
+    if (platform.startY != platform.endY){
+      angle = atan(platform.getSlope());
+    }
+  }
+    
   
   public void display(){
     ellipse(x,y,wide*2,high*2);
