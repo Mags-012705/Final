@@ -1,14 +1,15 @@
 public class Avatar{
-  float mass;
-  float xAcceleration;
-  float yAcceleration;
   float wide;
   float high;
   float x;
   float y;
+  
   float angle;
   float normalForce;
   float force;
+  float mass;
+  float xAcceleration;
+  float yAcceleration;
   
   public Avatar(float xcor, float ycor, float wi, float hi){
     x = xcor;
