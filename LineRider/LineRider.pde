@@ -16,6 +16,7 @@ void setup() {
   size(1000, 1000);
   //current = new Avatar(40, 40, 5, 5);
   currentCol = 255;
+  lines = new SegmentList();
 }
 
 void draw() {
