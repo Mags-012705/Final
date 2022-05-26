@@ -24,4 +24,5 @@ public class SegmentList {
       current = current.next;
     }
   }
+  
 }

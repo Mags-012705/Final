@@ -37,6 +37,9 @@ public class Segment {
     return endY;
   }
   
+  float getSlope() {
+    return (float)(endY-startY)/(endX-startX);
+  }
   void display() {
     stroke(myColor);
     strokeWeight(weight);

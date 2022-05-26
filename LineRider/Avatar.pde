@@ -61,7 +61,7 @@ public class Avatar{
   if the distance is < 1 and if the x cor is between the start 
   and end x cors of the line.
   */
-  boolean onSegment() to Avatar {
+  boolean onSegment() {
     return false;
   }
   
