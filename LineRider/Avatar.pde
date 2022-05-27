@@ -55,5 +55,33 @@ public class Avatar{
   public void display(){
     ellipse(x,y,wide*2,high*2);
   }
+  /* Should return whether or not there is a segment under 
+  the avatar. Will utilize he distance between a line and a 
+  point as well as the x coordinate of the avatar and see 
+  if the distance is < 1 and if the x cor is between the start 
+  and end x cors of the line.
+  */
+  boolean onSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 1) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  }
   
+  /*should return the segment that the avatar is on 
+  top of if it is on top of a segment. */
+  Segment getSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 1) {
+        return current;
+      }
+      current = current.next;
+    }
+    return null;
+  }
 }
