@@ -78,7 +78,7 @@ public class Avatar{
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
-      if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 5
+      if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
       && (x <= current.endX && x >= current.startX)) {
         return current;
       }
