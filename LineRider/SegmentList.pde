@@ -1,22 +1,22 @@
 public class SegmentList {
   Segment start, end;
   int size;
-  
+
   SegmentList() {
     size = 0;
-    start = new Segment(0,0,0,0,0,1);
-    end = new Segment(0,0,0,0,0,1);
+    start = new Segment(0, 0, 0, 0, 0, 1);
+    end = new Segment(0, 0, 0, 0, 0, 1);
     start.next = end;
     end.prev = start;
   }
-  
+
   void add(Segment x) {
     x.prev = end.prev;
     x.next = end;
     end.prev.next = x;
     end.prev = x;
   }
-  
+
   void display() {
     Segment current = start;
     while (current != null) {
@@ -24,5 +24,20 @@ public class SegmentList {
       current = current.next;
     }
   }
-  
+
+  void testing() {
+    Segment current = start;
+    int x = 0, y = 0;
+    while (current != null) {
+      if (y >= height) {
+        y = 0;
+        x += 250;
+      } else {
+        y += 10;
+      }
+      current.testing(x, y);
+
+      current = current.next;
+    }
+  }
 }

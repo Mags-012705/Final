@@ -29,13 +29,16 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    onLine = current.getSegment(lines);
-    current.setPlat(onLine);
-    current.move();
+<<<<<<< HEAD
+
+=======
+    if (current.onSegment(lines) != true) {
+      current.move();
+    }
     current.display();
   }
   lines.display();
-
+>>>>>>> fcc524f7e6a825384a870b347ee11ca25effe09d
   String mo = "Mode : ";
   if (MODE == 0) {
     mo += "Draw Mode";
@@ -47,6 +50,7 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
+  //lines.testing();
 }
 
 

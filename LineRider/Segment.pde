@@ -20,9 +20,12 @@ public class Segment {
     weight = thickness;
     slope = (float)(endY-startY)/(endX-startX);
     b = (float)y - (slope)*x;
-    A = -1*((float)(endY-startY));
+    A = ((float)(endY-startY));
     B = (float)(endX-startX);
-    C = b * (endX-startX);
+    C = -1 * b * (endX-startX);
+    if (endX-startX == 0) {
+      C = 0;
+    }
   }
   
   float getCoeff() {
@@ -56,5 +59,9 @@ public class Segment {
     stroke(myColor);
     strokeWeight(weight);
     line(startX, startY, endX, endY);
+  }
+  
+  void testing(int x, int y) {
+    text("equation: " + this.A +"x " + this.B+"y " + this.C, x, 40+y);
   }
 }
