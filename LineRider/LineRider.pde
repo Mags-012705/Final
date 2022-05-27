@@ -22,17 +22,18 @@ void setup() {
 }
 
 void draw() {
-  //background(255);
+  background(255);
   if (MODE == 0) {
     if (mousePressed == true) {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
-    lines.display();
   } else if (MODE == 1) {
-    current.move();
+    if (current.onSegment(lines) != true) {
+      current.move();
+    }
     current.display();
   }
-
+  lines.display();
   String mo = "Mode : ";
   if (MODE == 0) {
     mo += "Draw Mode";
@@ -44,6 +45,7 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
+  //lines.testing();
 }
 
 
