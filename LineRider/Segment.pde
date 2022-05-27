@@ -3,9 +3,12 @@ public class Segment {
   int startY;
   int endX;
   int endY;
+  float b;
   color myColor;
   float weight;
   float frictionalCoeff;
+  float A,B,C;
+  float slope;
   Segment prev,next;
   
   Segment(int x, int y, int x2, int y2, color Color, float thickness) {
@@ -15,7 +18,11 @@ public class Segment {
     endY = y2;
     myColor = Color;
     weight = thickness;
-    
+    slope = (float)(endY-startY)/(endX-startX);
+    b = (float)y - (slope)*x;
+    A = -1*((float)(endY-startY));
+    B = (float)(endX-startX);
+    C = b * (endX-startX);
   }
   
   float getCoeff() {
@@ -35,6 +42,13 @@ public class Segment {
   
   int getEndY() {
     return endY;
+  }
+  
+  float getSlope() {
+    return slope;
+  }
+  float getB() {
+    return b;
   }
   
   void display() {
