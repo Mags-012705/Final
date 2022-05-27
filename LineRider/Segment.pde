@@ -50,6 +50,7 @@ public class Segment {
   float getB() {
     return b;
   }
+ 
   
   void display() {
     stroke(myColor);

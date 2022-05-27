@@ -3,11 +3,14 @@ public class Avatar{
   float high;
   float x;
   float y;
+  Segment platform;
+  float mass;
   
   float angle;
   float normalForce;
   float force;
-  float mass;
+  float yForce;
+  float xForce;
   float xAcceleration;
   float yAcceleration;
   
@@ -18,12 +21,20 @@ public class Avatar{
     high = hi;
     mass = 10;
     
+    angle = -90;
     xAcceleration = 0.75;
-    force = mass * xAcceleration;
-    normalForce = mass * yAcceleration;
+    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
+    normalForce = -mass * GRAVITY;
+    xForce = xAcceleration * mass;
+    yForce = mass * GRAVITY;
+    yAcceleration = yForce/mass;
   }
+ 
   
+  // change all phsyics variables and move the avatar=====================
   public void move (){
+    
+    forceProcessing();
     x += xAcceleration;
     y += yAcceleration;
     
@@ -31,8 +42,11 @@ public class Avatar{
     
     yAcceleration += GRAVITY;
   }
+ 
+  //THE PHYSICS FORCES IS APPLIED HERE=================================
   
-  public void friction(Segment platform){
+  //Should apply gravity to force
+  public void friction(){
     float frictionF = platform.getCoeff() * normalForce;
     force -= frictionF;
     xAcceleration = force/mass;
@@ -42,8 +56,9 @@ public class Avatar{
   public void airResistance(){
   }
 
-  
-  private void calcNormAng(Segment platform){
+
+  //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
+  public void calcNormAng(){
     if (platform.startY != platform.endY){
       angle = atan(platform.getSlope());
       if (platform.startY > this.y || platform.endY > this.y){
@@ -56,11 +71,23 @@ public class Avatar{
       normalForce = mass * xAcceleration;
     }
   }
-    
   
-  public void display(){
-    ellipse(x,y,wide*2,high*2);
+  private void forceProcessing(){
+    if (angle >=90){
+      xForce = cos(angle) * force;
+      yForce = sin(angle) * force;
+    }else{
+      yForce = cos(angle) * force;
+      xForce = sin(angle) * force;
+    }
+    xAcceleration = xForce/mass;
+    yAcceleration = yForce/mass;
   }
+  
+  
+  
+  //Lines stuff Here ================================= 
+ 
   /* Should return whether or not there is a segment under 
   the avatar. Will utilize he distance between a line and a 
   point as well as the x coordinate of the avatar and see 
@@ -89,5 +116,13 @@ public class Avatar{
       current = current.next;
     }
     return null;
+  }
+  
+  public void setPlat(Segment on){
+    platform = on;
+  }
+  
+    public void display(){
+    ellipse(x,y,wide*2,high*2);
   }
 }
