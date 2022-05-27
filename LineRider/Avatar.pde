@@ -61,13 +61,27 @@ public class Avatar{
   if the distance is < 1 and if the x cor is between the start 
   and end x cors of the line.
   */
-  boolean onSegment() {
+  boolean onSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 1) {
+        return true;
+      }
+      current = current.next;
+    }
     return false;
   }
   
   /*should return the segment that the avatar is on 
   top of if it is on top of a segment. */
   Segment getSegment(SegmentList segments) {
-    return segments.start;
+    Segment current = segments.start;
+    while (current != null) {
+      if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 1) {
+        return current;
+      }
+      current = current.next;
+    }
+    return null;
   }
 }
