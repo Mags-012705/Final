@@ -29,11 +29,17 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-
-    onLine = current.getSegment(lines);
-    current.setPlat(onLine);
-    current.move();
-    current.display();
+    if (!current.onSegment(lines)){
+      current.move();
+      current.display();
+      
+      /*
+      onLine = current.getSegment(lines);
+      current.setPlat(onLine);
+      current.move();
+      current.display();
+      */
+    }
   }
   lines.display();
 
