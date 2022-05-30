@@ -33,14 +33,18 @@ public class Avatar{
   
   // change all phsyics variables and move the avatar=====================
   public void move (){
-    
-    forceProcessing();
+    if (this.onSegment(lines)){
+      calcNormAng();
+      forceProcessing();
+      xAcceleration += xForce/mass;
+      yAcceleration = yForce/mass;
+    }else{
+      yAcceleration += GRAVITY;
+    }
     x += xAcceleration;
     y += yAcceleration;
     
     //Apply grav here for now (for testing)
-    
-    yAcceleration += GRAVITY;
   }
  
   //THE PHYSICS FORCES IS APPLIED HERE=================================
