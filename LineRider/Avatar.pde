@@ -33,8 +33,9 @@ public class Avatar{
   
   // change all phsyics variables and move the avatar=====================
   public void move (){
-    if (this.onSegment(lines)){
+    if (this.getSegment(lines) != null){
       calcNormAng();
+      friction();
       forceProcessing();
       xAcceleration += xForce/mass;
       yAcceleration = yForce/mass;
@@ -53,7 +54,6 @@ public class Avatar{
   public void friction(){
     float frictionF = platform.getCoeff() * normalForce;
     force -= frictionF;
-    xAcceleration = force/mass;
   }
   
   
@@ -98,7 +98,7 @@ public class Avatar{
   if the distance is < 1 and if the x cor is between the start 
   and end x cors of the line.
   */
-  boolean onSegment(SegmentList segments) {
+  boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
       if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
