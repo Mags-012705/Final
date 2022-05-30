@@ -1,5 +1,5 @@
 int MODE;
-final float GRAVITY = 0.98;
+final float GRAVITY = 0.5;
 float GRAVITY_ACC;
 color currentCol;
 float curWeight;
@@ -28,7 +28,9 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    current.move();
+    if (current.isOnSegment(lines) != true) {
+      current.move();
+    }
     current.display();
   }
   lines.display();
