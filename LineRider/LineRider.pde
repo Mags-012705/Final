@@ -6,6 +6,7 @@ float curWeight;
 SegmentList lines;
 int Gpoints;
 Avatar current;
+colorBlocks colors;
 
 /*
   NOTES:
@@ -19,6 +20,12 @@ void setup() {
   currentCol = 0;
   curWeight = 1;
   lines = new SegmentList();
+  for (int i = 0; i < 255; i+=30) {
+    for (int j = 0; j < width; j+= height/9) {
+      colors.add(new colorBlock(50, j, i));
+    }
+  }
+  
 }
 
 void draw() {
@@ -45,7 +52,10 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  lines.testing();
+  for (colorBlocks a : colors) {
+    a.display();
+  }
+  //lines.testing();
 }
 
 

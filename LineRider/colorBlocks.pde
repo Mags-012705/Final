@@ -1,0 +1,13 @@
+public class colorBlocks {
+  colorBlock start, end;
+  
+  colorBlocks() {
+    start = new colorBlock(0,0,255);
+    end = new colorBlock(0,0,255);
+    start.next = end;
+    end.prev = start;
+  }
+  
+  void add (colorBlock toAdd) {
+  }
+}
