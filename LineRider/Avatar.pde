@@ -33,15 +33,16 @@ public class Avatar{
   
   // change all phsyics variables and move the avatar=====================
   public void move (){
+    force = abs(force);
     if (this.getSegment(lines) != null){
+      text("Angle : " + angle, 20, 50);
       platform = getSegment(lines);
       calcNormAng();
       beforePhys();
       friction();
       forceProcessing();
       xAcceleration += 3 * xForce/mass;
-      yAcceleration = yForce/(3*mass);
-      
+      yAcceleration = yForce/(7*mass);      
     }else{
       yAcceleration += GRAVITY;
     }
@@ -67,7 +68,7 @@ public class Avatar{
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng(){
     if (platform.startY != platform.endY){
-      angle = atan(platform.getSlope());
+      angle = atan((platform.getSlope()));
       if (platform.startY > this.y || platform.endY > this.y){
         normalForce = (mass*GRAVITY) - (force * sin(angle));
       }else{
