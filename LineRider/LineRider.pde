@@ -14,7 +14,7 @@ ArrayList<colorBlock> colors;
  */
 
 void setup() {
-  size(2000, 1000);
+  size(1500, 1000);
   background(255);
   current = new Avatar(40, 40, 5, 5);
   currentCol = 0;
