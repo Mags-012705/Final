@@ -36,6 +36,7 @@ public class Avatar{
     if (this.getSegment(lines) != null){
       platform = getSegment(lines);
       calcNormAng();
+      beforePhys();
       friction();
       forceProcessing();
       xAcceleration += 3 * xForce/mass;
@@ -78,8 +79,16 @@ public class Avatar{
     }
   }
   
+  private void beforePhys(){
+    if (angle >= 0){
+      normalForce = (mass * GRAVITY) - (force * sin(angle));
+    }else{
+      normalForce = (mass * GRAVITY) + (force * sin(angle));
+    }
+  }
+  
   private void forceProcessing(){
-    if (angle >=90){
+    if (angle >=0){
       xForce = cos(angle) * force;
       yForce = sin(angle) * force;
     }else{
