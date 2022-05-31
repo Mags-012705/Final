@@ -46,7 +46,7 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  //lines.testing();
+  lines.testing();
 }
 
 

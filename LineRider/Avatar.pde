@@ -101,9 +101,16 @@ public class Avatar{
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
-      if ((abs(current.A*x + current.B*y + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
-      && (x <= current.endX && x >= current.startX)) {
-        return true;
+      if (current.endX > current.startX) {
+        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        && (x <= current.endX && x >= current.startX)) {
+          return true;
+        }
+      } else if (current.endX < current.startX) {
+        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        && (x >= current.endX && x <= current.startX)) {
+          return true;
+        }
       }
       current = current.next;
     }
@@ -115,9 +122,16 @@ public class Avatar{
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
-      if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
-      && (x <= current.endX && x >= current.startX)) {
-        return current;
+      if (current.endX > current.startX) {
+        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        && (x <= current.endX && x >= current.startX)) {
+          return current;
+        }
+      } else if (current.endX < current.startX) {
+        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        && (x >= current.endX && x <= current.startX)) {
+          return current;
+        }
       }
       current = current.next;
     }
