@@ -20,7 +20,7 @@ public class Segment {
     weight = thickness;
     slope = (float)(endY-startY)/(endX-startX);
     b = (float)y - (slope)*x;
-    A = ((float)(endY-startY));
+    A = -1*((float)(endY-startY));
     B = (float)(endX-startX);
     C = -1 * b * (endX-startX);
     if (endX-startX == 0) {
