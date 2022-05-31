@@ -38,8 +38,9 @@ public class Avatar{
       calcNormAng();
       friction();
       forceProcessing();
-      xAcceleration += xForce/mass;
-      yAcceleration = yForce/(5*mass);
+      xAcceleration += 3 * xForce/mass;
+      yAcceleration = yForce/(3*mass);
+      
     }else{
       yAcceleration += GRAVITY;
     }
@@ -137,10 +138,6 @@ public class Avatar{
       current = current.next;
     }
     return null;
-  }
-  
-  public void setPlat(Segment on){
-    platform = on;
   }
   
     public void display(){

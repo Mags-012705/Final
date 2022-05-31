@@ -29,7 +29,7 @@ void draw() {
     }
   } else if (MODE == 1) {
     //if (current.isOnSegment(lines) != true) {
-      current.move();
+    current.move();
     //}
     current.display();
   }
