@@ -1,16 +1,22 @@
 public class colorBlock {
   int size = 20;
-  color pColor;
+  int red, green, blue;
   int x, y;
   
-  colorBlock(int x1, int y1, color myColor) {
+  colorBlock(int x1, int y1, int r, int g, int b) {
     x = x1;
     y = y1;
-    pColor = myColor;
+    red = r;
+    green = g;
+    blue = b;
   }
   
   void display() {
-    fill(pColor);
+    fill(red, green, blue);
     square(x, y, size);
+  }
+  
+  color getCol() {
+    return color(red,green,blue);
   }
 }

@@ -21,17 +21,17 @@ void setup() {
   curWeight = 1;
   lines = new SegmentList();
   colors = new ArrayList<colorBlock>();
-  for (color i = 0; i < 400; i+=50) {
-    for (int j = 0; j < height; j+= 10+height/9) {
-      colors.add(new colorBlock(50, j, i));
-    }
-  }
-  
+  colors.add(new colorBlock(width-50, height/7, 230, 11, 11));
+  colors.add(new colorBlock(width-50, 2*height/7, 230, 131, 11));
+  colors.add(new colorBlock(width-50, 3*height/7, 226, 230, 11));
+  colors.add(new colorBlock(width-50, 4*height/7, 11, 230, 99));
+  colors.add(new colorBlock(width-50, 5*height/7, 26, 11, 230));
+  colors.add(new colorBlock(width-50, 6*height/7, 164, 11, 230));
 }
 
 void draw() {
   background(255);
-  if (MODE == 0) {
+  if (MODE == 0) {    
     if (mousePressed == true) {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
@@ -54,9 +54,9 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  //for (colorBlock a : colors) {
-  //  a.display();
-  //}
+  for (colorBlock a : colors) {
+    a.display();
+  }
   //lines.testing();
 }
 
@@ -82,4 +82,13 @@ void keyPressed() {
 }
 
 void erase() {
+}
+
+void mouseClicked() {
+  for (colorBlock a : colors) {
+     if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
+     mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
+       currentCol = a.getCol();
+     }
+  }
 }
