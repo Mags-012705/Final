@@ -29,6 +29,11 @@ public class Segment {
   }
   
   float getCoeff() {
+    //if (red(myColor) == 230 && green(myColor) == 11) {
+    //  return 0.00003;
+    //} else if (red(myColor) == 230) {
+    //  return 0.01;
+    //}
     return (float)this.myColor*this.weight*.001;
   }
   
