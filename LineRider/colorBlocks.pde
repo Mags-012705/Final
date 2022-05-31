@@ -14,4 +14,12 @@ public class colorBlocks {
     end.prev.next = toAdd;
     end.prev = toAdd;
   }
+  
+    void display() {
+    colorBlock current = start;
+    while (current != null) {
+      current.display();
+      current = current.next;
+    }
+  }
 }

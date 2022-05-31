@@ -12,6 +12,6 @@ public class colorBlock {
   
   void display() {
     fill(pColor);
-    square(x, y, 5);
+    square(x, y, size);
   }
 }

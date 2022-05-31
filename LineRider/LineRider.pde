@@ -20,8 +20,9 @@ void setup() {
   currentCol = 0;
   curWeight = 1;
   lines = new SegmentList();
+  colors = new colorBlocks();
   for (int i = 0; i < 255; i+=30) {
-    for (int j = 0; j < width; j+= height/9) {
+    for (int j = 0; j < height; j+= height/9) {
       colors.add(new colorBlock(50, j, i));
     }
   }
@@ -52,9 +53,7 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  for (colorBlocks a : colors) {
-    a.display();
-  }
+  colors.display();
   //lines.testing();
 }
 
