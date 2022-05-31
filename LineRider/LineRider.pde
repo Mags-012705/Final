@@ -40,6 +40,12 @@ void draw() {
     current.move();
     //}
     current.display();
+  } else if (MODE == 2) {
+    if (mousePressed == true) {
+      if (lines.getSegment(pmouseX, pmouseY) != null) {
+        lines.delete(lines.getSegment(pmouseX, pmouseY));
+      }
+    }
   }
   lines.display();
 
