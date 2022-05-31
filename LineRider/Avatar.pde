@@ -34,11 +34,12 @@ public class Avatar{
   // change all phsyics variables and move the avatar=====================
   public void move (){
     if (this.getSegment(lines) != null){
+      platform = getSegment(lines);
       calcNormAng();
       friction();
       forceProcessing();
       xAcceleration += xForce/mass;
-      yAcceleration = yForce/mass;
+      yAcceleration = yForce/(5*mass);
     }else{
       yAcceleration += GRAVITY;
     }

@@ -28,9 +28,9 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    if (current.isOnSegment(lines) != true) {
+    //if (current.isOnSegment(lines) != true) {
       current.move();
-    }
+    //}
     current.display();
   }
   lines.display();
@@ -46,7 +46,7 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  lines.testing();
+  //lines.testing();
 }
 
 
