@@ -9,5 +9,9 @@ public class colorBlocks {
   }
   
   void add (colorBlock toAdd) {
+    toAdd.prev = end.prev;
+    toAdd.next = end;
+    end.prev.next = toAdd;
+    end.prev = toAdd;
   }
 }

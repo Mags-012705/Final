@@ -2,6 +2,7 @@ public class colorBlock {
   int size = 20;
   color pColor;
   int x, y;
+  colorBlock next, prev;
   
   colorBlock(int x1, int y1, color myColor) {
     x = x1;
