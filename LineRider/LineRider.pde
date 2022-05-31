@@ -21,8 +21,8 @@ void setup() {
   curWeight = 1;
   lines = new SegmentList();
   colors = new ArrayList<colorBlock>();
-  for (int i = 0; i < 255; i+=30) {
-    for (int j = 0; j < height; j+= height/9) {
+  for (color i = 0; i < 400; i+=50) {
+    for (int j = 0; j < height; j+= 10+height/9) {
       colors.add(new colorBlock(50, j, i));
     }
   }
