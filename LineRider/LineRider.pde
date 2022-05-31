@@ -28,9 +28,9 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    if (current.isOnSegment(lines) != true) {
-      current.move();
-    }
+    //if (current.isOnSegment(lines) != true) {
+    current.move();
+    //}
     current.display();
   }
   lines.display();
