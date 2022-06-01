@@ -21,12 +21,13 @@ void setup() {
   curWeight = 1;
   lines = new SegmentList();
   colors = new ArrayList<colorBlock>();
-  colors.add(new colorBlock(width-50, height/7, 230, 11, 11));
-  colors.add(new colorBlock(width-50, 2*height/7, 230, 131, 11));
-  colors.add(new colorBlock(width-50, 3*height/7, 226, 230, 11));
-  colors.add(new colorBlock(width-50, 4*height/7, 11, 230, 99));
-  colors.add(new colorBlock(width-50, 5*height/7, 26, 11, 230));
-  colors.add(new colorBlock(width-50, 6*height/7, 164, 11, 230));
+  colors.add(new colorBlock(width-50, height/8, 230, 11, 11));
+  colors.add(new colorBlock(width-50, 2*height/8, 230, 131, 11));
+  colors.add(new colorBlock(width-50, 3*height/8, 226, 230, 11));
+  colors.add(new colorBlock(width-50, 4*height/8, 11, 230, 99));
+  colors.add(new colorBlock(width-50, 5*height/8, 26, 11, 230));
+  colors.add(new colorBlock(width-50, 6*height/8, 164, 11, 230));
+  colors.add(new colorBlock(width-50, 7*height/8, 0, 0, 0));
 }
 
 void draw() {
