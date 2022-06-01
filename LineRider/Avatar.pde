@@ -13,6 +13,7 @@ public class Avatar{
   float xForce;
   float xAcceleration;
   float yAcceleration;
+  PImage myImage;
   
   public Avatar(float xcor, float ycor, float wi, float hi){
     x = xcor;
