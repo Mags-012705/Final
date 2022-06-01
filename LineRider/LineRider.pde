@@ -85,6 +85,10 @@ void keyPressed() {
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
+  
+  if (key == BACKSPACE) {
+    lines = new SegmentList();
+  }
 }
 
 void erase() {
