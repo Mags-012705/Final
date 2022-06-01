@@ -16,7 +16,7 @@ ArrayList<colorBlock> colors;
 void setup() {
   size(1500, 1000);
   background(255);
-  current = new Avatar(40, 40, 5, 5);
+  current = new Avatar(width/2, 40, 5, 5);
   currentCol = 0;
   curWeight = 1;
   lines = new SegmentList();

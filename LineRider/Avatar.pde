@@ -19,9 +19,9 @@ public class Avatar{
     y = ycor;
     wide = wi;
     high = hi;
-    mass = 10;
+    mass = 300;
     
-    angle = -90;
+    angle = -QUARTER_PI;
     xAcceleration = 0.75;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = -mass * GRAVITY;
@@ -35,11 +35,16 @@ public class Avatar{
   public void move (){
     force = abs(force);
     if (this.getSegment(lines) != null){
-      text("Angle : " + angle, 20, 50);
+      text("Angle : " + degrees(angle), 20, 50);
+      text("yForce : " + angle, 20, 70);
+      text("xForce : " + angle, 20, 90);
+      text("Force : " + angle, 20, 110);
       platform = getSegment(lines);
+      text(QUARTER_PI + " ; " + platform.getSlope(), 20, 140);
       calcNormAng();
       beforePhys();
-      friction();
+      //friction();
+      acceleration();
       forceProcessing();
       xAcceleration += 3 * xForce/mass;
       yAcceleration = yForce/(7*mass);      
@@ -63,7 +68,17 @@ public class Avatar{
   
   public void airResistance(){
   }
+  
+  public void acceleration(){
+    if (angle < HALF_PI){
+      force = (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle));
+    }else if (angle > HALF_PI){
+      force = (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
+    }else{
+    }
+  }
 
+ //DOOUBGLE CHECK HOW PROGRAM CALCS ANGLE CAUSE ITS MESSING EVERYTHING UP
 
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng(){
