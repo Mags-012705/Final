@@ -35,10 +35,11 @@ public class Avatar{
   public void move (){
     force = abs(force);
     if (this.getSegment(lines) != null){
-      text("Angle : " + degrees(angle), 20, 50);
-      text("yForce : " + angle, 20, 70);
-      text("xForce : " + angle, 20, 90);
-      text("Force : " + angle, 20, 110);
+      text("Angle : " + degrees(angle) + " : " + angle, 20, 50);
+      text("Cos : " + cos(angle) + " || Sin : " + sin(angle), 20, 160);
+      text("yForce : " + yForce, 20, 70);
+      text("xForce : " + xForce, 20, 90);
+      text("Force : " + force, 20, 110);
       platform = getSegment(lines);
       text(QUARTER_PI + " ; " + platform.getSlope(), 20, 140);
       calcNormAng();
@@ -70,20 +71,24 @@ public class Avatar{
   }
   
   public void acceleration(){
-    if (angle < HALF_PI){
-      force = (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle));
-    }else if (angle > HALF_PI){
-      force = (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
+    if (angle < 0){
+      force = (mass * GRAVITY * sin(angle)  * 2) - (platform.getCoeff()* mass * GRAVITY * cos(angle) * 2);
+    }else if (angle > 0){
+      force = (mass * GRAVITY * sin(angle)  * 2) + (platform.getCoeff()* mass * GRAVITY * cos(angle) * 2);
     }else{
     }
   }
 
- //DOOUBGLE CHECK HOW PROGRAM CALCS ANGLE CAUSE ITS MESSING EVERYTHING UP
+ //Detect wall and decrease bounce. work on opposite slope
 
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng(){
     if (platform.startY != platform.endY){
       angle = atan((platform.getSlope()));
+      float ave = abs((platform.startY - platform.endY/2));
+      if (this.y > ave){
+        angle = - angle;
+      }
       if (platform.startY > this.y || platform.endY > this.y){
         normalForce = (mass*GRAVITY) - (force * sin(angle));
       }else{
