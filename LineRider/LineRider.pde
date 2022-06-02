@@ -7,7 +7,6 @@ SegmentList lines;
 int Gpoints;
 Avatar current;
 ArrayList<colorBlock> colors;
-
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -16,7 +15,6 @@ ArrayList<colorBlock> colors;
 void setup() {
   size(1500, 1000);
   background(255);
-  current = new Avatar(40, 40, 5, 5);
   currentCol = 0;
   curWeight = 1;
   lines = new SegmentList();
@@ -64,7 +62,7 @@ void draw() {
   for (colorBlock a : colors) {
     a.display();
   }
-  //lines.testing();
+  lines.testing();
 }
 
 
@@ -76,7 +74,8 @@ void keyPressed() {
       MODE++;
     }
     if (MODE == 1) {
-      current = new Avatar(40, 40, 5, 5);
+      PImage image = loadImage("Avatar.png");
+      current = new Avatar(40, 40, 5, 5, image);
     }
   }
 
@@ -86,7 +85,7 @@ void keyPressed() {
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
-  
+
   if (key == BACKSPACE) {
     lines = new SegmentList();
   }
@@ -97,9 +96,9 @@ void erase() {
 
 void mouseClicked() {
   for (colorBlock a : colors) {
-     if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
-     mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
-       currentCol = a.getCol();
-     }
+    if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
+      mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
+      currentCol = a.getCol();
+    }
   }
 }
