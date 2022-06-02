@@ -75,7 +75,7 @@ void keyPressed() {
     }
     if (MODE == 1) {
       PImage image = loadImage("Avatar.png");
-      current = new Avatar(40, 40, 5, 5, image);
+      current = new Avatar(40, 40, image.width, image.height, image);
     }
   }
 
