@@ -7,7 +7,6 @@ SegmentList lines;
 int Gpoints;
 Avatar current;
 ArrayList<colorBlock> colors;
-
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -16,17 +15,17 @@ ArrayList<colorBlock> colors;
 void setup() {
   size(1500, 1000);
   background(255);
-  current = new Avatar(40, 40, 5, 5);
   currentCol = 0;
   curWeight = 1;
   lines = new SegmentList();
   colors = new ArrayList<colorBlock>();
-  colors.add(new colorBlock(width-50, height/7, 230, 11, 11));
-  colors.add(new colorBlock(width-50, 2*height/7, 230, 131, 11));
-  colors.add(new colorBlock(width-50, 3*height/7, 226, 230, 11));
-  colors.add(new colorBlock(width-50, 4*height/7, 11, 230, 99));
-  colors.add(new colorBlock(width-50, 5*height/7, 26, 11, 230));
-  colors.add(new colorBlock(width-50, 6*height/7, 164, 11, 230));
+  colors.add(new colorBlock(width-50, height/8, 230, 11, 11));
+  colors.add(new colorBlock(width-50, 2*height/8, 230, 131, 11));
+  colors.add(new colorBlock(width-50, 3*height/8, 226, 230, 11));
+  colors.add(new colorBlock(width-50, 4*height/8, 11, 230, 99));
+  colors.add(new colorBlock(width-50, 5*height/8, 26, 11, 230));
+  colors.add(new colorBlock(width-50, 6*height/8, 164, 11, 230));
+  colors.add(new colorBlock(width-50, 7*height/8, 0, 0, 0));
 }
 
 void draw() {
@@ -63,7 +62,7 @@ void draw() {
   for (colorBlock a : colors) {
     a.display();
   }
-  //lines.testing();
+  lines.testing();
 }
 
 
@@ -75,7 +74,8 @@ void keyPressed() {
       MODE++;
     }
     if (MODE == 1) {
-      current = new Avatar(40, 40, 5, 5);
+      PImage image = loadImage("Avatar.png");
+      current = new Avatar(40, 40, 5, 5, image);
     }
   }
 
@@ -85,6 +85,10 @@ void keyPressed() {
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
+
+  if (key == BACKSPACE) {
+    lines = new SegmentList();
+  }
 }
 
 void erase() {
@@ -92,9 +96,9 @@ void erase() {
 
 void mouseClicked() {
   for (colorBlock a : colors) {
-     if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
-     mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
-       currentCol = a.getCol();
-     }
+    if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
+      mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
+      currentCol = a.getCol();
+    }
   }
 }

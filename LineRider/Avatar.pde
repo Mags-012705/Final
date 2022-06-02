@@ -13,8 +13,9 @@ public class Avatar{
   float xForce;
   float xAcceleration;
   float yAcceleration;
+  PImage myImage;
   
-  public Avatar(float xcor, float ycor, float wi, float hi){
+  public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_){
     x = xcor;
     y = ycor;
     wide = wi;
@@ -28,6 +29,7 @@ public class Avatar{
     xForce = xAcceleration * mass;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
+    myImage = myImage_;
   }
  
   

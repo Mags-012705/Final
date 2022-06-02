@@ -35,7 +35,7 @@ public class Segment {
     //  return 0.01;
     //}
     //return (float)this.myColor*this.weight*.001;
-    return 0.0001;
+    return 0.001;
   }
   
   int getStartX() {
