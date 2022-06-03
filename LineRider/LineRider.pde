@@ -55,7 +55,12 @@ void draw() {
       }
     }
   }
-  if (MODE != 1) {
+  if (keyPressed == true) {
+    if (keyCode == 65 && mousePressed == true) {
+      translate((pmouseX-mouseX),(pmouseY-mouseY));
+    }
+    lines.display();
+  } else if (MODE != 1) {
     lines.display();
   }
   String mo = "Mode : ";
