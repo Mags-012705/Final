@@ -37,8 +37,13 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    scale = 5.0;
-    display(scale);
+    if (!paused) {
+      current.move();
+    }
+    current.display();
+    lines.display();
+    //scale = 5.0;
+    //display(scale);
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -48,22 +53,22 @@ void draw() {
   }
   if (MODE != 1) {
     lines.display();
-    String mo = "Mode : ";
-    if (MODE == 0) {
-      mo += "Draw Mode";
-    } else if (MODE == 1) {
-      mo += "Playing";
-    } else if (MODE == 2) {
-      mo += "Erase Mode";
-    } else if (MODE == 3) {
-      mo += "Paused";
-    }
-    fill(0);
-    text(mo, 20, 20);
-    text("Weight: " + curWeight, 20, 30);
-    for (colorBlock a : colors) {
-      a.display();
-    }
+  }
+  String mo = "Mode : ";
+  if (MODE == 0) {
+    mo += "Draw Mode";
+  } else if (MODE == 1) {
+    mo += "Playing";
+  } else if (MODE == 2) {
+    mo += "Erase Mode";
+  } else if (MODE == 3) {
+    mo += "Paused";
+  }
+  fill(0);
+  text(mo, 20, 20);
+  text("Weight: " + curWeight, 20, 30);
+  for (colorBlock a : colors) {
+    a.display();
   }
   //lines.testing();
 }
