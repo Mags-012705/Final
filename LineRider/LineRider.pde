@@ -7,6 +7,8 @@ SegmentList lines;
 int Gpoints;
 Avatar current;
 ArrayList<colorBlock> colors;
+float scale = 1;
+boolean paused;
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -35,10 +37,13 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    //if (current.isOnSegment(lines) != true) {
-    current.move();
-    //}
+    if (!paused) {
+      current.move();
+    }
     current.display();
+    lines.display();
+    //scale = 5.0;
+    //display(scale);
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -46,8 +51,9 @@ void draw() {
       }
     }
   }
-  lines.display();
-
+  if (MODE != 1) {
+    lines.display();
+  }
   String mo = "Mode : ";
   if (MODE == 0) {
     mo += "Draw Mode";
@@ -55,6 +61,8 @@ void draw() {
     mo += "Playing";
   } else if (MODE == 2) {
     mo += "Erase Mode";
+  } else if (MODE == 3) {
+    mo += "Paused";
   }
   fill(0);
   text(mo, 20, 20);
@@ -75,7 +83,7 @@ void keyPressed() {
     }
     if (MODE == 1) {
       PImage image = loadImage("Avatar.png");
-      image.resize(40,38);
+      image.resize(40, 38);
       current = new Avatar(40, 40, image.width, image.height, image);
     }
   }
@@ -90,6 +98,10 @@ void keyPressed() {
   if (key == BACKSPACE) {
     lines = new SegmentList();
   }
+
+  if (keyCode == 80) {
+    paused = !paused;
+  } 
 }
 
 void erase() {
@@ -102,4 +114,17 @@ void mouseClicked() {
       currentCol = a.getCol();
     }
   }
+}
+
+void display(float scale) {
+  //pushMatrix();
+  translate(current.x, current.y);
+  scale(scale);
+  if (!paused) {
+      current.move();
+    }
+  translate(-current.x, -current.y);
+  current.display();
+  lines.display();
+  //popMatrix();
 }

@@ -67,6 +67,7 @@ public class Segment {
     line(startX, startY, endX, endY);
   }
   
+  
   void testing(int x, int y) {
     text("equation: " + this.A +"x " + this.B+"y " + this.C, x, 40+y);
   }
