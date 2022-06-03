@@ -75,6 +75,7 @@ void keyPressed() {
     }
     if (MODE == 1) {
       PImage image = loadImage("Avatar.png");
+      image.resize(40,38);
       current = new Avatar(40, 40, image.width, image.height, image);
     }
   }

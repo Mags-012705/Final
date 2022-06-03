@@ -14,6 +14,9 @@ public class Avatar{
   float xAcceleration;
   float yAcceleration;
   PImage myImage;
+  float prevAngle = 0;
+  boolean wasOnSeg = false;
+  Segment prevPlat;
   
   public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_){
     x = xcor;
@@ -116,12 +119,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
         && (x <= current.endX && x >= current.startX)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
         && (x >= current.endX && x <= current.startX)) {
           return true;
         }
@@ -137,12 +140,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
         && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
         && (x >= current.endX && x <= current.startX)) {
           return current;
         }
@@ -155,9 +158,20 @@ public class Avatar{
     public void display(){
     pushMatrix();
     translate(x,y);
+    int count = 0;
     if (isOnSegment(lines) == true) {
       platform = getSegment(lines);
       rotate(platform.getAngle());
+      wasOnSeg = true;
+      prevAngle = platform.getAngle();
+      prevPlat = platform;
+      count++;
+    } else if (wasOnSeg == true && count <= 2) {
+      rotate(prevPlat.getAngle());
+      count++;
+    } else if (wasOnSeg == true && count > 2) {
+      wasOnSeg = false;
+      count = 0;
     }
     image(myImage, 0, 0);
     popMatrix();
