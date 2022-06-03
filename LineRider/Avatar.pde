@@ -13,21 +13,25 @@ public class Avatar{
   float xForce;
   float xAcceleration;
   float yAcceleration;
+  PImage myImage;
+  float prevAngle = 0;
+  boolean wasOnSeg = false;
+  Segment prevPlat;
   
-  public Avatar(float xcor, float ycor, float wi, float hi){
+  public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_){
     x = xcor;
     y = ycor;
     wide = wi;
     high = hi;
     mass = 300;
-    
-    angle = -QUARTER_PI;
+    angle = radians(-90);
     xAcceleration = 0.75;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = -mass * GRAVITY;
     xForce = xAcceleration * mass;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
+    myImage = myImage_;
   }
  
   
@@ -35,6 +39,7 @@ public class Avatar{
   public void move (){
     force = abs(force);
     if (this.getSegment(lines) != null){
+
       text("Angle : " + degrees(angle) + " : " + angle, 20, 50);
       text("Cos : " + cos(angle) + " || Sin : " + sin(angle), 20, 160);
       text("yForce : " + yForce, 20, 70);
@@ -134,12 +139,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x <= current.endX && x >= current.startX)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x >= current.endX && x <= current.startX)) {
           return true;
         }
@@ -155,12 +160,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x >= current.endX && x <= current.startX)) {
           return current;
         }
@@ -170,7 +175,32 @@ public class Avatar{
     return null;
   }
   
+  //void display() {
+  //  ellipse(x, y, 5, 5);
+  //}
+  
     public void display(){
-    ellipse(x,y,wide*2,high*2);
+    pushMatrix();
+    translate(x,y);
+    int count = 0;
+    if (isOnSegment(lines) == true) {
+      platform = getSegment(lines);
+      rotate(platform.getAngle());
+      wasOnSeg = true;
+      prevAngle = platform.getAngle();
+      prevPlat = platform;
+      count++;
+    } else if (wasOnSeg == true && count <= 2) {
+      rotate(prevPlat.getAngle());
+      count++;
+    } else if (wasOnSeg == true && count > 2) {
+      wasOnSeg = false;
+      count = 0;
+    }
+    image(myImage, 0, 0);
+    translate(-x,-y);
+    popMatrix();
+    //ellipse(x, y, 5, 5);
   }
+  
 }

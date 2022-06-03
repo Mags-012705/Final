@@ -61,6 +61,10 @@ public class SegmentList {
         && (x >= current.endX && x <= current.startX)) {
           return current;
         }
+      } else if (current.startX == current.endX) {
+        if (x >= current.endX - 1 && x <= current.startX + 1 && y >= current.endY - 1 && y <= current.startY + 1) {
+          return current;
+        }
       }
       current = current.next;
     }

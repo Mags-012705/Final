@@ -35,7 +35,7 @@ public class Segment {
     //  return 0.01;
     //}
     //return (float)this.myColor*this.weight*.001;
-    return 0.0001;
+    return 0.001;
   }
   
   int getStartX() {
@@ -67,7 +67,12 @@ public class Segment {
     line(startX, startY, endX, endY);
   }
   
+  
   void testing(int x, int y) {
     text("equation: " + this.A +"x " + this.B+"y " + this.C, x, 40+y);
+  }
+  
+  float getAngle() {
+    return atan(slope);
   }
 }
