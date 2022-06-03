@@ -57,7 +57,7 @@ void draw() {
   }
   if (keyPressed == true) {
     if (keyCode == 65 && mousePressed == true) {
-      translate((pmouseX-mouseX),(pmouseY-mouseY));
+      translate((pmouseX-mouseX), (pmouseY-mouseY));
     }
     lines.display();
   } else if (MODE != 1) {
@@ -68,6 +68,7 @@ void draw() {
     mo += "Draw Mode";
   } else if (MODE == 1) {
     mo += "Playing";
+    text("platform: " + current.platform, 20, 60);
   } else if (MODE == 2) {
     mo += "Erase Mode";
   } else if (MODE == 3) {
@@ -116,10 +117,9 @@ void keyPressed() {
   if (keyCode == 90) {
     zoom = !zoom;
   }
-  
+
   if (keyCode == 65) {
     if (mousePressed == true) {
-      
     }
   }
 }

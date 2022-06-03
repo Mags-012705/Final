@@ -5,7 +5,8 @@ public class Avatar {
   int y;
   Segment platform;
   float mass;
-
+  Segment twoPrevPlat;
+  int counter = 0;
   float angle;
   float normalForce;
   float force;
@@ -24,7 +25,6 @@ public class Avatar {
     wide = wi;
     high = hi;
     mass = 10;
-
     angle = radians(-90);
     xAcceleration = 0.75;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
