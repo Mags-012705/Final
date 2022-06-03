@@ -153,9 +153,7 @@ public class Avatar{
   }
   
     public void display(){
-      //text(myImage.height + "   " + myImage.width, 50, 100);
-    //myImage.resize((myImage.width*100)/500, (myImage.height*100)/500);
-    //image(myImage, x, y);
-    ellipse(x, y, 5, 5);
+    image(myImage, x, y, 44, 38);
+    //ellipse(x, y, 5, 5);
   }
 }

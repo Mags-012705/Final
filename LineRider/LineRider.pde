@@ -62,7 +62,7 @@ void draw() {
   for (colorBlock a : colors) {
     a.display();
   }
-  lines.testing();
+  //lines.testing();
 }
 
 
