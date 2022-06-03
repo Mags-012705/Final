@@ -35,7 +35,11 @@ void draw() {
   background(255);
   if (MODE == 0) {    
     if (mousePressed == true) {
-      lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
+      if (!keyPressed) {
+        lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
+      } else if (keyCode == 65) {
+        translate(-(pmouseX-mouseX), -(pmouseY-mouseY));
+      }
     }
   } else if (MODE == 1) {
     if (!paused) {
@@ -55,12 +59,7 @@ void draw() {
       }
     }
   }
-  if (keyPressed == true) {
-    if (keyCode == 65 && mousePressed == true) {
-      translate((pmouseX-mouseX),(pmouseY-mouseY));
-    }
-    lines.display();
-  } else if (MODE != 1) {
+  if (MODE != 1) {
     lines.display();
   }
   String mo = "Mode : ";
@@ -115,12 +114,6 @@ void keyPressed() {
 
   if (keyCode == 90) {
     zoom = !zoom;
-  }
-  
-  if (keyCode == 65) {
-    if (mousePressed == true) {
-      
-    }
   }
 }
 
