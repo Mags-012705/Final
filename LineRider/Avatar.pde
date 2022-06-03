@@ -40,7 +40,7 @@ public class Avatar{
   public void move (){
     force = abs(force);
     if (this.getSegment(lines) != null){
-      text("Angle : " + angle, 20, 50);
+      //text("Angle : " + angle, 20, 50);
       platform = getSegment(lines);
       calcNormAng();
       beforePhys();
@@ -177,4 +177,5 @@ public class Avatar{
     popMatrix();
     //ellipse(x, y, 5, 5);
   }
+  
 }
