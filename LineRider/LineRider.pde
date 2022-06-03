@@ -9,6 +9,7 @@ Avatar current;
 ArrayList<colorBlock> colors;
 float scale = 1;
 boolean paused;
+boolean zoom = false;
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -40,10 +41,13 @@ void draw() {
     if (!paused) {
       current.move();
     }
-    current.display();
-    lines.display();
-    //scale = 5.0;
-    //display(scale);
+    if (zoom) {
+      scale = 5.0;
+      display(scale);
+    } else {
+      current.display();
+      lines.display();
+    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -64,6 +68,7 @@ void draw() {
   } else if (MODE == 3) {
     mo += "Paused";
   }
+  text("Zoom: " + zoom, 20, 40);
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
@@ -101,7 +106,11 @@ void keyPressed() {
 
   if (keyCode == 80) {
     paused = !paused;
-  } 
+  }
+
+  if (keyCode == 90) {
+    zoom = !zoom;
+  }
 }
 
 void erase() {
@@ -117,14 +126,19 @@ void mouseClicked() {
 }
 
 void display(float scale) {
-  //pushMatrix();
-  translate(current.x, current.y);
-  scale(scale);
+  pushMatrix();
+  translate(current.x-150, current.y-100);
+  popMatrix();
   if (!paused) {
-      current.move();
-    }
-  translate(-current.x, -current.y);
+    current.move();
+  }
+  scale(scale);
+  translate(-current.x+150, -current.y+100);
   current.display();
   lines.display();
-  //popMatrix();
+}
+
+void display() {
+  current.display();
+  lines.display();
 }
