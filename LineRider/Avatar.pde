@@ -119,12 +119,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x <= current.endX && x >= current.startX)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x >= current.endX && x <= current.startX)) {
           return true;
         }
@@ -140,12 +140,12 @@ public class Avatar{
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+high) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 20
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
         && (x >= current.endX && x <= current.startX)) {
           return current;
         }
