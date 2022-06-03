@@ -48,6 +48,13 @@ void draw() {
       current.display();
       lines.display();
     }
+    text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 50);
+    text("yForce : " + current.yForce, 20, 70);
+    text("xForce : " + current.xForce, 20, 90);
+    text("Force : " + current.force, 20, 110);
+    if (current.platform != null){
+      text(current.platform.getSlope(), 20, 140);
+    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {

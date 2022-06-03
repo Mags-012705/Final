@@ -26,11 +26,12 @@ public class Avatar{
     mass = 300;
     angle = radians(-90);
     xAcceleration = 0.75;
+    yForce = mass * GRAVITY;
+    yAcceleration = yForce/mass;
+    //yAcceleration = -GRAVITY * mass;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = -mass * GRAVITY;
     xForce = xAcceleration * mass;
-    yForce = mass * GRAVITY;
-    yAcceleration = yForce/mass;
     myImage = myImage_;
   }
  
@@ -39,13 +40,7 @@ public class Avatar{
   public void move (){
     force = abs(force);
     if (this.getSegment(lines) != null){
-
-      text("Angle : " + degrees(angle) + " : " + angle, 20, 50);
-      text("yForce : " + yForce, 20, 70);
-      text("xForce : " + xForce, 20, 90);
-      text("Force : " + force, 20, 110);
       platform = getSegment(lines);
-      text(platform.getSlope(), 20, 140);
       calcNormAng();
       beforePhys();
       //friction();
@@ -76,14 +71,13 @@ public class Avatar{
   
   public void acceleration(){
     if (angle < 0){
-      force = (mass * GRAVITY * sin(angle)  * 2) - (platform.getCoeff()* mass * GRAVITY * cos(angle) * 2);
-    }else if (angle > 0){
       force = (mass * GRAVITY * sin(angle)  * 2) + (platform.getCoeff()* mass * GRAVITY * cos(angle) * 2);
+    }else if (angle > 0){
+      force = (mass * GRAVITY * sin(angle)  * 2) - (platform.getCoeff()* mass * GRAVITY * cos(angle) * 2);
     }else{
     }
+    
   }
-
- //Detect wall and decrease bounce. work on opposite slope
 
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng(){
@@ -95,7 +89,7 @@ public class Avatar{
       }
       if (platform.getSlope() < 0){
         angle = - angle;
-        angle += 180;
+        angle += HALF_PI;
       }
       if (platform.startY > this.y || platform.endY > this.y){
         normalForce = (mass*GRAVITY) - (force * sin(angle));
@@ -125,7 +119,7 @@ public class Avatar{
       xForce = sin(angle) * force;
     }
     xAcceleration = xForce/mass;
-    yAcceleration = yForce/mass;
+    
   }
   
   
