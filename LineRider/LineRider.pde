@@ -40,10 +40,10 @@ void draw() {
     if (!paused) {
       current.move();
     }
-    current.display();
-    lines.display();
-    //scale = 5.0;
-    //display(scale);
+    //current.display();
+    //lines.display();
+    scale = 5.0;
+    display(scale);
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -101,7 +101,7 @@ void keyPressed() {
 
   if (keyCode == 80) {
     paused = !paused;
-  } 
+  }
 }
 
 void erase() {
@@ -117,14 +117,14 @@ void mouseClicked() {
 }
 
 void display(float scale) {
-  //pushMatrix();
-  translate(current.x, current.y);
-  scale(scale);
+  pushMatrix();
+  translate(current.x-150, current.y-100);
+  popMatrix();
   if (!paused) {
-      current.move();
-    }
-  translate(-current.x, -current.y);
+    current.move();
+  }
+  scale(scale);
+  translate(-current.x+150, -current.y+100);
   current.display();
   lines.display();
-  //popMatrix();
 }
