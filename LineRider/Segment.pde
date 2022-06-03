@@ -75,4 +75,8 @@ public class Segment {
   float getAngle() {
     return atan(slope);
   }
+  
+  float getDistance(int x, int y) {
+    return abs((A*x + B*(y+5) + C)/sqrt(A*A + B*B));
+  }
 }

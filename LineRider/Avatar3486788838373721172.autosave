@@ -1,12 +1,11 @@
 public class Avatar {
   float wide;
   float high;
-  int x;
-  int y;
+  float x;
+  float y;
   Segment platform;
   float mass;
-  Segment twoPrevPlat;
-  int counter = 0;
+
   float angle;
   float normalForce;
   float force;
@@ -19,12 +18,13 @@ public class Avatar {
   boolean wasOnSeg = false;
   Segment prevPlat;
 
-  public Avatar(int xcor, int ycor, float wi, float hi, PImage myImage_) {
+  public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_) {
     x = xcor;
     y = ycor;
     wide = wi;
     high = hi;
     mass = 10;
+
     angle = radians(-90);
     xAcceleration = 0.75;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
@@ -107,89 +107,67 @@ public class Avatar {
 
 
 
-  ////Lines stuff Here ================================= 
+  //Lines stuff Here ================================= 
 
-  ///* Should return whether or not there is a segment under 
-  // the avatar. Will utilize he distance between a line and a 
-  // point as well as the x coordinate of the avatar and see 
-  // if the distance is < 1 and if the x cor is between the start 
-  // and end x cors of the line.
-  // */
-  //boolean isOnSegment(SegmentList segments) {
-  //  Segment current = segments.start;
-  //  while (current != null) {
-  //    if (current.endX > current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x <= current.endX && x >= current.startX)) {
-  //        return true;
-  //      }
-  //    } else if (current.endX < current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x >= current.endX && x <= current.startX)) {
-  //        return true;
-  //      }
-  //    }
-  //    current = current.next;
-  //  }
-  //  return false;
-  //}
-
-  ///*should return the segment that the avatar is on 
-  // top of if it is on top of a segment. */
-  //Segment getSegment(SegmentList segments) {
-  //  Segment current = segments.start;
-  //  while (current != null) {
-  //    if (current.endX > current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x <= current.endX && x >= current.startX)) {
-  //        return current;
-  //      }
-  //    } else if (current.endX < current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x >= current.endX && x <= current.startX)) {
-  //        return current;
-  //      }
-  //    }
-  //    current = current.next;
-  //  }
-  //  return null;
-  //}
+  /* Should return whether or not there is a segment under 
+   the avatar. Will utilize he distance between a line and a 
+   point as well as the x coordinate of the avatar and see 
+   if the distance is < 1 and if the x cor is between the start 
+   and end x cors of the line.
+   */
+   /*
+  boolean isOnSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if (current.endX > current.startX) {
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+          && (x <= current.endX && x >= current.startX)) {
+          return true;
+        }
+      } else if (current.endX < current.startX) {
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+          && (x >= current.endX && x <= current.startX)) {
+          return true;
+        }
+      }
+      current = current.next;
+    }
+    return false;
+  }
+*/
+  /*should return the segment that the avatar is on 
+   top of if it is on top of a segment. *//*
+  Segment getSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if (current.endX > current.startX) {
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+          && (x <= current.endX && x >= current.startX)) {
+          return current;
+        }
+      } else if (current.endX < current.startX) {
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+          && (x >= current.endX && x <= current.startX)) {
+          return current;
+        }
+      }
+      current = current.next;
+    }
+    return null;
+  }
 
   //void display() {
   //  ellipse(x, y, 5, 5);
   //}
+*/
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
-    Segment closest = current;
+    Segment closest = getDistance(x,y);
     while (current != null) {
-      if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
-      } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
+      if (current.endX > current.startX) {
       }
     }
-    if (closest.getDistance(x,y) < high) {
-      return true;
-    }
-    return false;
   }
-  
-  Segment getSegment(SegmentList segments) {
-    Segment current = segments.start;
-    Segment closest = current;
-    while (current != null) {
-      if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
-      } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
-      }
-    }
-    if (closest.getDistance(x,y) < high) {
-      return closest;
-    }
-    return null;
-  }
-  
   public void display() {
     pushMatrix();
     translate(x, y);
