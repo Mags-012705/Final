@@ -52,12 +52,12 @@ public class SegmentList {
     Segment current = this.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 10
+        if (current.getDistance(x,y) < 10
           && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y+5) + current.C))/sqrt(current.A*current.A + current.B*current.B) < 10
+        if (current.getDistance(x,y) < 10
           && (x >= current.endX && x <= current.startX)) {
           return current;
         }

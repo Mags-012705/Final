@@ -1,8 +1,8 @@
 public class Avatar {
   float wide;
   float high;
-  float x;
-  float y;
+  int x;
+  int y;
   Segment platform;
   float mass;
 
@@ -18,7 +18,7 @@ public class Avatar {
   boolean wasOnSeg = false;
   Segment prevPlat;
 
-  public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_) {
+  public Avatar(int xcor, int ycor, float wi, float hi, PImage myImage_) {
     x = xcor;
     y = ycor;
     wide = wi;
@@ -119,12 +119,12 @@ public class Avatar {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+        if (current.getDistance(x,y) < high
           && (x <= current.endX && x >= current.startX)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+        if (current.getDistance(x,y) < high
           && (x >= current.endX && x <= current.startX)) {
           return true;
         }
@@ -140,12 +140,12 @@ public class Avatar {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+        if (current.getDistance(x,y) < high
           && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
+        if (current.getDistance(x,y) < high
           && (x >= current.endX && x <= current.startX)) {
           return current;
         }
