@@ -41,12 +41,11 @@ public class Avatar{
     if (this.getSegment(lines) != null){
 
       text("Angle : " + degrees(angle) + " : " + angle, 20, 50);
-      text("Cos : " + cos(angle) + " || Sin : " + sin(angle), 20, 160);
       text("yForce : " + yForce, 20, 70);
       text("xForce : " + xForce, 20, 90);
       text("Force : " + force, 20, 110);
       platform = getSegment(lines);
-      text(QUARTER_PI + " ; " + platform.getSlope(), 20, 140);
+      text(platform.getSlope(), 20, 140);
       calcNormAng();
       beforePhys();
       //friction();
@@ -94,6 +93,10 @@ public class Avatar{
       if (this.y > ave){
         angle = - angle;
       }
+      if (platform.getSlope() < 0){
+        angle = - angle;
+        angle += 180;
+      }
       if (platform.startY > this.y || platform.endY > this.y){
         normalForce = (mass*GRAVITY) - (force * sin(angle));
       }else{
@@ -101,7 +104,7 @@ public class Avatar{
       }
     }else{
       angle = 0;
-      normalForce = mass * xAcceleration;
+      normalForce = mass * GRAVITY;
     }
   }
   
