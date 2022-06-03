@@ -70,4 +70,8 @@ public class Segment {
   void testing(int x, int y) {
     text("equation: " + this.A +"x " + this.B+"y " + this.C, x, 40+y);
   }
+  
+  float getAngle() {
+    return atan(slope);
+  }
 }

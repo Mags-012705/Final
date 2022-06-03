@@ -153,7 +153,14 @@ public class Avatar{
   }
   
     public void display(){
-    image(myImage, x, y, 44, 38);
+    pushMatrix();
+    translate(x,y);
+    if (isOnSegment(lines) == true) {
+      platform = getSegment(lines);
+      rotate(platform.getAngle());
+    }
+    image(myImage, 0, 0);
+    popMatrix();
     //ellipse(x, y, 5, 5);
   }
 }
