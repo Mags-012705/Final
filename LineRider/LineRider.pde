@@ -111,6 +111,12 @@ void keyPressed() {
   if (keyCode == 90) {
     zoom = !zoom;
   }
+  
+  if (keyCode == 65) {
+    if (mousePressed == true) {
+      
+    }
+  }
 }
 
 void erase() {
