@@ -123,10 +123,11 @@ void mouseClicked() {
 
 void display(float scale) {
     //pushMatrix();
-    translate(current.x, current.y);
     scale(scale);
     current.display();
     lines.display();
-    translate(-current.x,-current.y);
+        translate(-current.x-20, -current.y-20);
+
+    //translate(current.x,current.y);
     //popMatrix();
 }
