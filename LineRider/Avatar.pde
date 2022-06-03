@@ -119,6 +119,8 @@ public class Avatar{
       xForce = sin(angle) * force;
     }
     xAcceleration = xForce/mass;
+    yAcceleration = yForce/mass;
+    yAcceleration += (abs(platform.startY - platform.endY)/abs(platform.startX-platform.endX)/GRAVITY);
     
   }
   
