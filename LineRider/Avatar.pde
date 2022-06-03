@@ -25,7 +25,7 @@ public class Avatar{
     high = hi;
     mass = 10;
     
-    angle = -90;
+    angle = radians(-90);
     xAcceleration = 0.75;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = -mass * GRAVITY;
@@ -155,27 +155,32 @@ public class Avatar{
     return null;
   }
   
-    public void display(){
-    pushMatrix();
-    translate(x,y);
-    int count = 0;
-    if (isOnSegment(lines) == true) {
-      platform = getSegment(lines);
-      rotate(platform.getAngle());
-      wasOnSeg = true;
-      prevAngle = platform.getAngle();
-      prevPlat = platform;
-      count++;
-    } else if (wasOnSeg == true && count <= 2) {
-      rotate(prevPlat.getAngle());
-      count++;
-    } else if (wasOnSeg == true && count > 2) {
-      wasOnSeg = false;
-      count = 0;
-    }
-    image(myImage, 0, 0);
-    popMatrix();
-    //ellipse(x, y, 5, 5);
+  void display() {
+    ellipse(x, y, 5, 5);
   }
+  
+  //  public void display(){
+  //  pushMatrix();
+  //  translate(x,y);
+  //  int count = 0;
+  //  if (isOnSegment(lines) == true) {
+  //    platform = getSegment(lines);
+  //    rotate(platform.getAngle());
+  //    wasOnSeg = true;
+  //    prevAngle = platform.getAngle();
+  //    prevPlat = platform;
+  //    count++;
+  //  } else if (wasOnSeg == true && count <= 2) {
+  //    rotate(prevPlat.getAngle());
+  //    count++;
+  //  } else if (wasOnSeg == true && count > 2) {
+  //    wasOnSeg = false;
+  //    count = 0;
+  //  }
+  //  image(myImage, 0, 0);
+  //  translate(-x,-y);
+  //  popMatrix();
+  //  //ellipse(x, y, 5, 5);
+  //}
   
 }

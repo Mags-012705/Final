@@ -8,6 +8,7 @@ int Gpoints;
 Avatar current;
 ArrayList<colorBlock> colors;
 float scale = 1;
+boolean paused;
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -36,17 +37,8 @@ void draw() {
       lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
   } else if (MODE == 1) {
-    //if (current.isOnSegment(lines) != true) {
-    //pushMatrix();
-    text(current.x + "__" + current.y, 10, 10);
-    if (MODE != 3) {
-      current.move();
-    }
-    //current.display();
-    //lines.display();
     scale = 5.0;
     display(scale);
-    //popMatrix();
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -56,22 +48,22 @@ void draw() {
   }
   if (MODE != 1) {
     lines.display();
-  String mo = "Mode : ";
-  if (MODE == 0) {
-    mo += "Draw Mode";
-  } else if (MODE == 1) {
-    mo += "Playing";
-  } else if (MODE == 2) {
-    mo += "Erase Mode";
-  } else if (MODE == 3) {
-    mo += "Paused";
-  }
-  fill(0);
-  text(mo, 20, 20);
-  text("Weight: " + curWeight, 20, 30);
-  for (colorBlock a : colors) {
-    a.display();
-  }
+    String mo = "Mode : ";
+    if (MODE == 0) {
+      mo += "Draw Mode";
+    } else if (MODE == 1) {
+      mo += "Playing";
+    } else if (MODE == 2) {
+      mo += "Erase Mode";
+    } else if (MODE == 3) {
+      mo += "Paused";
+    }
+    fill(0);
+    text(mo, 20, 20);
+    text("Weight: " + curWeight, 20, 30);
+    for (colorBlock a : colors) {
+      a.display();
+    }
   }
   //lines.testing();
 }
@@ -86,7 +78,7 @@ void keyPressed() {
     }
     if (MODE == 1) {
       PImage image = loadImage("Avatar.png");
-      image.resize(40,38);
+      image.resize(40, 38);
       current = new Avatar(40, 40, image.width, image.height, image);
     }
   }
@@ -101,12 +93,10 @@ void keyPressed() {
   if (key == BACKSPACE) {
     lines = new SegmentList();
   }
-  
+
   if (keyCode == 80) {
-    MODE = 3;
-  } else if (keyCode == 80 && MODE == 3) {
-    MODE = 1;
-  }
+    paused = !paused;
+  } 
 }
 
 void erase() {
@@ -122,12 +112,14 @@ void mouseClicked() {
 }
 
 void display(float scale) {
-    //pushMatrix();
-    scale(scale);
-    current.display();
-    lines.display();
-        translate(-current.x-20, -current.y-20);
-
-    //translate(current.x,current.y);
-    //popMatrix();
+  //pushMatrix();
+  translate(current.x, current.y);
+  scale(scale);
+  if (!paused) {
+      current.move();
+    }
+  translate(-current.x, -current.y);
+  current.display();
+  lines.display();
+  //popMatrix();
 }
