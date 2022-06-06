@@ -160,15 +160,16 @@ public class Avatar {
   //}
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
-    Segment closest = current;
+    Segment closest = segments.start;
     while (current != null) {
       if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
         closest = current;
       } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
         closest = current;
       }
+      current = current.next;
     }
-    if (closest.getDistance(x,y) < high) {
+    if (closest.getDistance(x,y) <= high) {
       return true;
     }
     return false;
@@ -176,15 +177,16 @@ public class Avatar {
   
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
-    Segment closest = current;
+    Segment closest = segments.start;
     while (current != null) {
       if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
         closest = current;
       } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
         closest = current;
       }
+      current = current.next;
     }
-    if (closest.getDistance(x,y) < high) {
+    if (closest.getDistance(x,y) <= high) {
       return closest;
     }
     return null;

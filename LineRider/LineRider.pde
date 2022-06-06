@@ -14,6 +14,7 @@ boolean zoom = false;
   NOTES:
  modes go [0,1,2] -> draw, play, erase
  */
+
 void setup() {
   size(1500, 1000);
   background(255);
@@ -29,6 +30,7 @@ void setup() {
   colors.add(new colorBlock(width-50, 6*height/8, 164, 11, 230));
   colors.add(new colorBlock(width-50, 7*height/8, 0, 0, 0));
 }
+
 void draw() {
   background(255);
   if (MODE == 0) {    
@@ -46,6 +48,9 @@ void draw() {
       current.display();
       lines.display();
     }
+    if (current.isOnSegment(lines)) {
+      text(""+current.getSegment(lines),20,70);
+    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {
@@ -53,12 +58,7 @@ void draw() {
       }
     }
   }
-  if (keyPressed == true) {
-    if (keyCode == 65 && mousePressed == true) {
-      translate((pmouseX-mouseX), (pmouseY-mouseY));
-    }
-    lines.display();
-  } else if (MODE != 1) {
+  if (MODE != 1) {
     lines.display();
   }
   String mo = "Mode : ";
@@ -66,7 +66,6 @@ void draw() {
     mo += "Draw Mode";
   } else if (MODE == 1) {
     mo += "Playing";
-    text("platform: " + current.platform, 20, 60);
   } else if (MODE == 2) {
     mo += "Erase Mode";
   } else if (MODE == 3) {
@@ -81,6 +80,8 @@ void draw() {
   }
   //lines.testing();
 }
+
+
 void keyPressed() {
   if (key == ' ') {
     if (MODE == 2) {
@@ -94,29 +95,30 @@ void keyPressed() {
       current = new Avatar(40, 40, image.width, image.height, image);
     }
   }
+
   if (MODE == 0) {
   }
+
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
+
   if (key == BACKSPACE) {
     lines = new SegmentList();
   }
+
   if (keyCode == 80) {
     paused = !paused;
   }
+
   if (keyCode == 90) {
     zoom = !zoom;
   }
-
-
-  if (keyCode == 65) {
-    if (mousePressed == true) {
-    }
-  }
 }
+
 void erase() {
 }
+
 void mouseClicked() {
   for (colorBlock a : colors) {
     if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
@@ -125,6 +127,7 @@ void mouseClicked() {
     }
   }
 }
+
 void display(float scale) {
   pushMatrix();
   translate(current.x-150, current.y-100);
@@ -137,6 +140,7 @@ void display(float scale) {
   current.display();
   lines.display();
 }
+
 void display() {
   current.display();
   lines.display();
