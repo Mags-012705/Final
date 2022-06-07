@@ -6,6 +6,7 @@ public class Avatar {
   Segment platform;
   float mass;
   float angle;
+  float refAngle;
   float normalForce;
   float force;
   float yForce;
@@ -17,19 +18,20 @@ public class Avatar {
   boolean wasOnSeg = false;
   Segment prevPlat;
 
-  public Avatar(int xcor, int ycor, float wi, float hi, PImage myImage_) {
+  public Avatar(float xcor, float ycor, float wi, float hi, PImage myImage_) {
     x = xcor;
     y = ycor;
     wide = wi;
     high = hi;
-    mass = 10;
+    mass = 3;
     angle = radians(-90);
-    xAcceleration = 0.75;
-    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
-    normalForce = -mass * GRAVITY;
-    xForce = xAcceleration * mass;
+    xAcceleration = 0.25;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
+    //yAcceleration = -GRAVITY * mass;
+    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
+    normalForce = mass * GRAVITY;
+    xForce = xAcceleration * mass;
     myImage = myImage_;
   }
 
@@ -38,14 +40,17 @@ public class Avatar {
   public void move () {
     force = abs(force);
     if (this.getSegment(lines) != null) {
-      //text("Angle : " + angle, 20, 50);
-       platform = getSegment(lines);
+      platform = getSegment(lines);
       calcNormAng();
-      beforePhys();
-      friction();
-      forceProcessing();
-      xAcceleration += 3 * xForce/mass;
-      yAcceleration = yForce/(7*mass);
+      //beforePhys();
+      if (angle != 0) {
+        acceleration();
+        forceProcessing();
+        xAcceleration += xForce/mass;
+      }else{
+        yForce = 0;
+        yAcceleration = 0;
+      }
     } else {
       yAcceleration += GRAVITY;
     }
@@ -56,8 +61,7 @@ public class Avatar {
   }
 
   //THE PHYSICS FORCES IS APPLIED HERE=================================
-
-  //Should apply gravity to force
+  //Should apply friction to force
   public void friction() {
     float frictionF = platform.getCoeff() * normalForce;
     force -= frictionF;
@@ -67,52 +71,74 @@ public class Avatar {
   public void airResistance() {
   }
 
+  public void acceleration() {
+    if (angle < 0) {
+      force += (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
+    } else if (angle > 0) {
+      force += (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle));
+    } else {
+    }
+  }
 
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng() {
-    if (platform.startY != platform.endY) {
+    if (platform.startY != platform.endY || platform.getSlope() == 0) {
       angle = atan((platform.getSlope()));
-      if (platform.startY > this.y || platform.endY > this.y) {
-        normalForce = (mass*GRAVITY) - (force * sin(angle));
+      refAngle = angle;
+      float ave = abs((platform.startY - platform.endY/2));
+      if (this.y > ave) {
+        angle = - angle;
+      }
+      if (platform.getSlope() < 0) {
+        angle = - angle;
+        angle += PI + QUARTER_PI;
+      }
+      if (this.y > ave) {
+        normalForce = (mass*GRAVITY) - (force * sin(refAngle));
       } else {
-        normalForce = (mass * GRAVITY) + (force * sin(angle));
+        normalForce = (mass * GRAVITY) + (force * sin(refAngle));
       }
     } else {
       angle = 0;
-      normalForce = mass * xAcceleration;
+      normalForce = mass * GRAVITY;
     }
   }
 
-  private void beforePhys() {
-    if (angle >= 0) {
-      normalForce = (mass * GRAVITY) - (force * sin(angle));
-    } else {
-      normalForce = (mass * GRAVITY) + (force * sin(angle));
-    }
-  }
+  /*private void beforePhys(){
+   if (angle >= 0){
+   normalForce = (mass * GRAVITY) - (force * sin(angle));
+   }else{
+   normalForce = (mass * GRAVITY) + (force * sin(angle));
+   }
+   }*/
 
+
+  //REDO X AND Y FORCE CALCS TO FIT NEW ANGLES
   private void forceProcessing() {
     if (angle >=0) {
       xForce = cos(angle) * force;
-      yForce = sin(angle) * force;
+      yForce = sin(angle ) * force;
     } else {
       yForce = cos(angle) * force;
       xForce = sin(angle) * force;
     }
-    xAcceleration = xForce/mass;
+    if (angle > PI) {
+      xForce = 0;
+    }
+    xAcceleration += xForce/ (2 *mass);
     yAcceleration = yForce/mass;
+    yAcceleration += (abs(platform.startY - platform.endY)/abs(platform.startX-platform.endX)/GRAVITY);
   }
 
 
+  //Lines stuff Here ================================= 
 
-  ////Lines stuff Here ================================= 
-
-  ///* Should return whether or not there is a segment under 
-  // the avatar. Will utilize he distance between a line and a 
-  // point as well as the x coordinate of the avatar and see 
-  // if the distance is < 1 and if the x cor is between the start 
-  // and end x cors of the line.
-  // */
+  /* Should return whether or not there is a segment under 
+   the avatar. Will utilize he distance between a line and a 
+   point as well as the x coordinate of the avatar and see 
+   if the distance is < 1 and if the x cor is between the start 
+   and end x cors of the line.
+   */
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
@@ -137,7 +163,7 @@ public class Avatar {
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
-      if (current.endX > current.startX) {
+      if (current.endX > current.startX) {]
         if (current.getDistance(x,y) < high
           && (x <= current.endX && x >= current.startX)) {
           return current;
@@ -156,6 +182,7 @@ public class Avatar {
   //void display() {
   //  ellipse(x, y, 5, 5);
   //}
+<<<<<<< HEAD
   /*
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;

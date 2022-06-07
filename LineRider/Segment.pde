@@ -54,7 +54,7 @@ public class Segment {
   }
 
   float getSlope() {
-    return slope;
+    return 5 * slope;
   }
   float getB() {
     return b;
