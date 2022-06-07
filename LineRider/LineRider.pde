@@ -48,9 +48,6 @@ void draw() {
       current.display();
       lines.display();
     }
-    if (current.isOnSegment(lines)) {
-      text(""+current.getSegment(lines),20,70);
-    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (lines.getSegment(pmouseX, pmouseY) != null) {

@@ -5,8 +5,6 @@ public class Avatar {
   int y;
   Segment platform;
   float mass;
-  Segment twoPrevPlat;
-  int counter = 0;
   float angle;
   float normalForce;
   float force;
@@ -41,7 +39,7 @@ public class Avatar {
     force = abs(force);
     if (this.getSegment(lines) != null) {
       //text("Angle : " + angle, 20, 50);
-      platform = getSegment(lines);
+       platform = getSegment(lines);
       calcNormAng();
       beforePhys();
       friction();
@@ -115,83 +113,93 @@ public class Avatar {
   // if the distance is < 1 and if the x cor is between the start 
   // and end x cors of the line.
   // */
-  //boolean isOnSegment(SegmentList segments) {
-  //  Segment current = segments.start;
-  //  while (current != null) {
-  //    if (current.endX > current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x <= current.endX && x >= current.startX)) {
-  //        return true;
-  //      }
-  //    } else if (current.endX < current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x >= current.endX && x <= current.startX)) {
-  //        return true;
-  //      }
-  //    }
-  //    current = current.next;
-  //  }
-  //  return false;
-  //}
+  boolean isOnSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if (current.endX > current.startX) {
+        if (current.getDistance(x,y) < high
+          && (x <= current.endX && x >= current.startX)) {
+          return true;
+        }
+      } else if (current.endX < current.startX) {
+        if (current.getDistance(x,y) < high
+          && (x >= current.endX && x <= current.startX)) {
+          return true;
+        }
+      }
+      current = current.next;
+    }
+    return false;
+  }
 
-  ///*should return the segment that the avatar is on 
-  // top of if it is on top of a segment. */
-  //Segment getSegment(SegmentList segments) {
-  //  Segment current = segments.start;
-  //  while (current != null) {
-  //    if (current.endX > current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x <= current.endX && x >= current.startX)) {
-  //        return current;
-  //      }
-  //    } else if (current.endX < current.startX) {
-  //      if (current.getDistance(x,y) < high
-  //        && (x >= current.endX && x <= current.startX)) {
-  //        return current;
-  //      }
-  //    }
-  //    current = current.next;
-  //  }
-  //  return null;
-  //}
+  /*should return the segment that the avatar is on 
+   top of if it is on top of a segment. */
+  Segment getSegment(SegmentList segments) {
+    Segment current = segments.start;
+    while (current != null) {
+      if (current.endX > current.startX) {
+        if (current.getDistance(x,y) < high
+          && (x <= current.endX && x >= current.startX)) {
+          return current;
+        }
+      } else if (current.endX < current.startX) {
+        if (current.getDistance(x,y) < high
+          && (x >= current.endX && x <= current.startX)) {
+          return current;
+        }
+      }
+      current = current.next;
+    }
+    return null;
+  }
 
   //void display() {
   //  ellipse(x, y, 5, 5);
   //}
+  /*
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
     Segment closest = segments.start;
     while (current != null) {
-      if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
-      } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
+      if (current.endX > current.startX) {
+        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+          closest = current;
+        }
+      } else if (current.endX < current.startX && x >= current.endX) {
+        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+          closest = current;
+        }
       }
       current = current.next;
     }
-    if (closest.getDistance(x,y) <= high) {
+    if (closest.getDistance(x, y) <= high) {
       return true;
     }
     return false;
   }
-  
+
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     Segment closest = segments.start;
     while (current != null) {
-      if (current.endX > current.startX && x <= current.endX && x >= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
-      } else if (current.endX < current.startX && x >= current.endX && x <= current.startX && current.getDistance(x,y) < closest.getDistance(x,y)) {
-        closest = current;
+      if (current.endX > current.startX) {
+        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+          closest = current;
+        }
+      } else if (current.endX < current.startX && x >= current.endX) {
+        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+          closest = current;
+        }
       }
       current = current.next;
     }
-    if (closest.getDistance(x,y) <= high) {
+    if (closest.getDistance(x, y) <= high) {
       return closest;
     }
     return null;
   }
-  
+  */
+
   public void display() {
     pushMatrix();
     translate(x, y);
