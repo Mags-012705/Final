@@ -1,5 +1,5 @@
 int MODE;
-final float GRAVITY = 0.5;
+final float GRAVITY = 0.25;
 float GRAVITY_ACC;
 color currentCol;
 float curWeight;
@@ -47,6 +47,15 @@ void draw() {
     } else {
       current.display();
       lines.display();
+    }
+    text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 60);
+    text("yForce : " + current.yForce, 20, 80);
+    text("xForce : " + current.xForce, 20, 100);
+    text("Force : " + current.force, 20, 120);
+    text("Normal Force : " + current.normalForce, 20, 140);
+    
+    if (current.platform != null){
+      text("slope : " + current.platform.getSlope(), 20, 160);
     }
   } else if (MODE == 2) {
     if (mousePressed == true) {
