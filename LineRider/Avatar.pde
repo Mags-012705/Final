@@ -1,8 +1,8 @@
 public class Avatar {
   float wide;
   float high;
-  int x;
-  int y;
+  float x;
+  float y;
   Segment platform;
   float mass;
   float angle;
@@ -182,7 +182,6 @@ public class Avatar {
   //void display() {
   //  ellipse(x, y, 5, 5);
   //}
-<<<<<<< HEAD
   /*
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;

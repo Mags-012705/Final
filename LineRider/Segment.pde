@@ -29,13 +29,12 @@ public class Segment {
   }
 
   float getCoeff() {
-    //if (red(myColor) == 230 && green(myColor) == 11) {
-    //  return 0.00003;
-    //} else if (red(myColor) == 230) {
-    //  return 0.01;
-    //}
-    //return (float)this.myColor*this.weight*.001;
-    return 0.01;
+    if (red(myColor) == 230 && green(myColor) == 11) {
+      return 0.001;
+    } else if (red(myColor) == 230) {
+      return 0.0001;
+    }
+    return (float)myColor * 0.1;
   }
 
   int getStartX() {
@@ -76,7 +75,7 @@ public class Segment {
     return atan(slope);
   }
   
-  float getDistance(int x, int y) {
+  float getDistance(float x, float y) {
     return abs((A*x + B*(y+5) + C)/sqrt(A*A + B*B));
   }
 }
