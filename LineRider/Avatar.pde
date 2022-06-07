@@ -7,6 +7,7 @@ public class Avatar {
   float mass;
 
   float angle;
+  float refAngle;
   float normalForce;
   float force;
   float yForce;
@@ -23,14 +24,14 @@ public class Avatar {
     y = ycor;
     wide = wi;
     high = hi;
-    mass = 30;
+    mass = 3;
     angle = radians(-90);
-    xAcceleration = 0.75;
+    xAcceleration = 0.25;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
     //yAcceleration = -GRAVITY * mass;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
-    normalForce = -mass * GRAVITY;
+    normalForce = mass * GRAVITY;
     xForce = xAcceleration * mass;
     myImage = myImage_;
   }
@@ -56,6 +57,9 @@ public class Avatar {
     }
     x += xAcceleration;
     y += yAcceleration;
+    if (this.getSegment(lines)!= null){
+      
+    }
 
     //Apply grav here for now (for testing)
   }
@@ -85,6 +89,7 @@ public class Avatar {
   public void calcNormAng() {
     if (platform.startY != platform.endY || platform.getSlope() == 0) {
       angle = atan((platform.getSlope()));
+      refAngle = angle;
       float ave = abs((platform.startY - platform.endY/2));
       if (this.y > ave) {
         angle = - angle;
@@ -94,9 +99,9 @@ public class Avatar {
         angle += PI + QUARTER_PI;
       }
       if (this.y > ave) {
-        normalForce = (mass*GRAVITY) - (force * sin(angle));
+        normalForce = (mass*GRAVITY) - (force * sin(refAngle));
       } else {
-        normalForce = (mass * GRAVITY) + (force * sin(angle));
+        normalForce = (mass * GRAVITY) + (force * sin(refAngle));
       }
     } else {
       angle = 0;
