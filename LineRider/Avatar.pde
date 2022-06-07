@@ -16,6 +16,7 @@ public class Avatar {
   float yAcceleration;
   PImage myImage;
   float prevAngle = 0;
+  float airConstant = 0.07;
   boolean wasOnSeg = false;
   Segment prevPlat;
 
@@ -44,22 +45,24 @@ public class Avatar {
       platform = getSegment(lines);
       calcNormAng();
       //beforePhys();
+      airResistance();
       if (angle != 0) {
         acceleration();
         forceProcessing();
         xAcceleration += xForce/mass;
-      }else{
+      } else {
         yForce = 0;
         yAcceleration = 0;
       }
     } else {
       yAcceleration += GRAVITY;
     }
+    
+    // ADD CHECK FOR PASSING PLATFORM HERE;
+    
+    //CHECK NORMAL FORCE CALC WHEN DROPPING ONTO NEW PLAT
     x += xAcceleration;
     y += yAcceleration;
-    if (this.getSegment(lines)!= null){
-      
-    }
 
     //Apply grav here for now (for testing)
   }
@@ -74,6 +77,12 @@ public class Avatar {
 
 
   public void airResistance() {
+    float airxForce = sq(xAcceleration) * airConstant;
+    float airyForce = sq(yAcceleration) * airConstant;
+    xForce -= airxForce;
+    if (platform == null) {
+      yForce -= airyForce;
+    }
   }
 
   public void acceleration() {
