@@ -163,7 +163,7 @@ public class Avatar {
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
-      if (current.endX > current.startX) {]
+      if (current.endX > current.startX) {
         if (current.getDistance(x,y) < high
           && (x <= current.endX && x >= current.startX)) {
           return current;
