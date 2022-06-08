@@ -29,11 +29,11 @@ public class Avatar {
     angle = radians(-90);
     xAcceleration = 0.25;
     yForce = mass * GRAVITY;
+    xForce = xAcceleration * mass;
     yAcceleration = yForce/mass;
     //yAcceleration = -GRAVITY * mass;
-    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
+    force = mass * (sqrt(sq(xForce) + sq(yForce)));
     normalForce = mass * GRAVITY;
-    xForce = xAcceleration * mass;
     myImage = myImage_;
   }
 
@@ -45,9 +45,10 @@ public class Avatar {
       platform = getSegment(lines);
       calcNormAng();
       //beforePhys();
-      airResistance();
+      //airResistance();
       if (angle != 0) {
         acceleration();
+        //xForce /= 3;
         forceProcessing();
         xAcceleration += xForce/mass;
       } else {
@@ -58,9 +59,6 @@ public class Avatar {
       yAcceleration += GRAVITY;
     }
     
-    // ADD CHECK FOR PASSING PLATFORM HERE;
-    
-    //CHECK NORMAL FORCE CALC WHEN DROPPING ONTO NEW PLAT
     x += xAcceleration;
     y += yAcceleration;
 
@@ -89,7 +87,7 @@ public class Avatar {
     if (angle < 0) {
       force += (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
     } else if (angle > 0) {
-      force += (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle));
+      force += (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle)) ;
     } else {
     }
   }
@@ -102,6 +100,7 @@ public class Avatar {
       float ave = abs((platform.startY - platform.endY/2));
       if (this.y > ave) {
         angle = - angle;
+        //angle += QUARTER_PI;
       }
       if (platform.getSlope() < 0) {
         angle = - angle;
