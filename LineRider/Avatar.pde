@@ -32,7 +32,7 @@ public class Avatar {
     xForce = xAcceleration * mass;
     yAcceleration = yForce/mass;
     //yAcceleration = -GRAVITY * mass;
-    force = mass * (sqrt(sq(xForce) + sq(yForce)));
+    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = mass * GRAVITY;
     myImage = myImage_;
   }
@@ -55,6 +55,13 @@ public class Avatar {
         yForce = 0;
         yAcceleration = 0;
       }
+      
+      //check if this works (supposed to fix the not detecting wall problem)
+      if (platform.next != null && (platform.next.slope/abs(platform.next.slope)) + (platform.slope/abs(platform.slope)) == 0){
+        if ((xForce < 0 && (x < platform.endX || x < platform.startX)) || xForce > 0 && (x > platform.endX || x > platform.startX)){
+          xForce /= 10;
+        }
+      }
     } else {
       yAcceleration += GRAVITY;
     }
@@ -69,7 +76,7 @@ public class Avatar {
 
   //Should apply friction to force
   public void friction() {
-    float frictionF = platform.getCoeff() * normalForce;
+    float frictionF = platform.getCoeff() * normalForce * 5;
     force -= frictionF;
   }
 
@@ -85,7 +92,7 @@ public class Avatar {
 
   public void acceleration() {
     if (angle < 0) {
-      force += (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
+      force += (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle) );
     } else if (angle > 0) {
       force += (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle)) ;
     } else {
