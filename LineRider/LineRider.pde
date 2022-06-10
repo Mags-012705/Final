@@ -10,6 +10,8 @@ ArrayList<colorBlock> colors;
 float scale = 1;
 boolean paused;
 boolean zoom = false;
+    int xShift = 0, yShift = 0;
+
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -34,29 +36,25 @@ void setup() {
 void draw() {
   background(255);
   if (MODE == 0) {    
-    int xShift = 0, yShift = 0;
     if (mousePressed == true) {
       if (keyPressed) {
-        text("keypressed", 20, 70);
-        xShift += mouseX-pmouseX;
-        yShift += mouseY-pmouseY;
-        translate(mouseX-pmouseX, mouseY-pmouseY);
-      }
-      else {
-        lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
+        xShift += (mouseX-pmouseX);
+        yShift += (mouseY-pmouseY);
+      } else {
+        lines.add(new Segment(mouseX-xShift, mouseY-yShift, pmouseX-xShift, pmouseY-yShift, currentCol, curWeight));
       }
     }
-    translate(xShift,yShift);
     for (colorBlock a : colors) {
       a.display();
     }
+    translate(xShift,yShift);
     lines.display();
   } else if (MODE == 1) {
     if (!paused) {
       current.move();
     }
     if (zoom) {
-      scale = 5.0;
+      scale = 3.0;
       display(scale);
     } else {
       current.display();
@@ -73,12 +71,17 @@ void draw() {
     }
   } else if (MODE == 2) {
     if (mousePressed == true) {
-      if (lines.getSegment(pmouseX, pmouseY) != null) {
-        lines.delete(lines.getSegment(pmouseX, pmouseY));
+      if (keyPressed) {
+        xShift += (mouseX-pmouseX);
+        yShift += (mouseY-pmouseY);
+      } else if (lines.getSegment(pmouseX-xShift, pmouseY-yShift) != null) {
+        lines.delete(lines.getSegment(pmouseX-xShift, pmouseY-yShift));
       }
     }
-  }
-  if (MODE == 2) {
+    for (colorBlock a : colors) {
+      a.display();
+    }
+    translate(xShift,yShift);
     lines.display();
   }
   String mo = "Mode : ";
@@ -95,11 +98,6 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
-  if (MODE != 0) {
-    for (colorBlock a : colors) {
-      a.display();
-    }
-  }
   //lines.testing();
 }
 
