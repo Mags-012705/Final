@@ -5,8 +5,8 @@ public class Avatar {
   float y;
   Segment platform;
   float mass;
+
   float angle;
-  float refAngle;
   float normalForce;
   float force;
   float yForce;
@@ -23,15 +23,15 @@ public class Avatar {
     y = ycor;
     wide = wi;
     high = hi;
-    mass = 3;
+    mass = 10;
+
     angle = radians(-90);
-    xAcceleration = 0.25;
+    xAcceleration = 0.75;
+    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
+    normalForce = -mass * GRAVITY;
+    xForce = xAcceleration * mass;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
-    //yAcceleration = -GRAVITY * mass;
-    force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
-    normalForce = mass * GRAVITY;
-    xForce = xAcceleration * mass;
     myImage = myImage_;
   }
 
@@ -40,17 +40,14 @@ public class Avatar {
   public void move () {
     force = abs(force);
     if (this.getSegment(lines) != null) {
+      //text("Angle : " + angle, 20, 50);
       platform = getSegment(lines);
       calcNormAng();
-      //beforePhys();
-      if (angle != 0) {
-        acceleration();
-        forceProcessing();
-        xAcceleration += xForce/mass;
-      }else{
-        yForce = 0;
-        yAcceleration = 0;
-      }
+      beforePhys();
+      friction();
+      forceProcessing();
+      xAcceleration += 3 * xForce/mass;
+      yAcceleration = yForce/(7*mass);
     } else {
       yAcceleration += GRAVITY;
     }
@@ -61,7 +58,8 @@ public class Avatar {
   }
 
   //THE PHYSICS FORCES IS APPLIED HERE=================================
-  //Should apply friction to force
+
+  //Should apply gravity to force
   public void friction() {
     float frictionF = platform.getCoeff() * normalForce;
     force -= frictionF;
@@ -71,64 +69,42 @@ public class Avatar {
   public void airResistance() {
   }
 
-  public void acceleration() {
-    if (angle < 0) {
-      force += (mass * GRAVITY * sin(angle)) + (platform.getCoeff()* mass * GRAVITY * cos(angle));
-    } else if (angle > 0) {
-      force += (mass * GRAVITY * sin(angle)) - (platform.getCoeff()* mass * GRAVITY * cos(angle));
-    } else {
-    }
-  }
 
   //PHYSICS CAlCULATIONS FOR SEPERATE X AND Y FORCES================================
   public void calcNormAng() {
-    if (platform.startY != platform.endY || platform.getSlope() == 0) {
+    if (platform.startY != platform.endY) {
       angle = atan((platform.getSlope()));
-      refAngle = angle;
-      float ave = abs((platform.startY - platform.endY/2));
-      if (this.y > ave) {
-        angle = - angle;
-      }
-      if (platform.getSlope() < 0) {
-        angle = - angle;
-        angle += PI + QUARTER_PI;
-      }
-      if (this.y > ave) {
-        normalForce = (mass*GRAVITY) - (force * sin(refAngle));
+      if (platform.startY > this.y || platform.endY > this.y) {
+        normalForce = (mass*GRAVITY) - (force * sin(angle));
       } else {
-        normalForce = (mass * GRAVITY) + (force * sin(refAngle));
+        normalForce = (mass * GRAVITY) + (force * sin(angle));
       }
     } else {
       angle = 0;
-      normalForce = mass * GRAVITY;
+      normalForce = mass * xAcceleration;
     }
   }
 
-  /*private void beforePhys(){
-   if (angle >= 0){
-   normalForce = (mass * GRAVITY) - (force * sin(angle));
-   }else{
-   normalForce = (mass * GRAVITY) + (force * sin(angle));
-   }
-   }*/
+  private void beforePhys() {
+    if (angle >= 0) {
+      normalForce = (mass * GRAVITY) - (force * sin(angle));
+    } else {
+      normalForce = (mass * GRAVITY) + (force * sin(angle));
+    }
+  }
 
-
-  //REDO X AND Y FORCE CALCS TO FIT NEW ANGLES
   private void forceProcessing() {
     if (angle >=0) {
       xForce = cos(angle) * force;
-      yForce = sin(angle ) * force;
+      yForce = sin(angle) * force;
     } else {
       yForce = cos(angle) * force;
       xForce = sin(angle) * force;
     }
-    if (angle > PI) {
-      xForce = 0;
-    }
-    xAcceleration += xForce/ (2 *mass);
+    xAcceleration = xForce/mass;
     yAcceleration = yForce/mass;
-    yAcceleration += (abs(platform.startY - platform.endY)/abs(platform.startX-platform.endX)/GRAVITY);
   }
+
 
 
   //Lines stuff Here ================================= 
@@ -139,16 +115,17 @@ public class Avatar {
    if the distance is < 1 and if the x cor is between the start 
    and end x cors of the line.
    */
+   /*
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if (current.getDistance(x,y) < high
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
           && (x <= current.endX && x >= current.startX)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if (current.getDistance(x,y) < high
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
           && (x >= current.endX && x <= current.startX)) {
           return true;
         }
@@ -157,19 +134,19 @@ public class Avatar {
     }
     return false;
   }
-
+*/
   /*should return the segment that the avatar is on 
-   top of if it is on top of a segment. */
+   top of if it is on top of a segment. *//*
   Segment getSegment(SegmentList segments) {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if (current.getDistance(x,y) < high
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
           && (x <= current.endX && x >= current.startX)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if (current.getDistance(x,y) < high
+        if ((abs(current.A*x + current.B*(y) + current.C))/sqrt(current.A*current.A + current.B*current.B) < high
           && (x >= current.endX && x <= current.startX)) {
           return current;
         }
@@ -182,50 +159,15 @@ public class Avatar {
   //void display() {
   //  ellipse(x, y, 5, 5);
   //}
-  /*
+*/
   boolean isOnSegment(SegmentList segments) {
     Segment current = segments.start;
-    Segment closest = segments.start;
+    Segment closest = getDistance(x,y);
     while (current != null) {
       if (current.endX > current.startX) {
-        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      } else if (current.endX < current.startX && x >= current.endX) {
-        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
       }
-      current = current.next;
     }
-    if (closest.getDistance(x, y) <= high) {
-      return true;
-    }
-    return false;
   }
-
-  Segment getSegment(SegmentList segments) {
-    Segment current = segments.start;
-    Segment closest = segments.start;
-    while (current != null) {
-      if (current.endX > current.startX) {
-        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      } else if (current.endX < current.startX && x >= current.endX) {
-        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      }
-      current = current.next;
-    }
-    if (closest.getDistance(x, y) <= high) {
-      return closest;
-    }
-    return null;
-  }
-  */
-
   public void display() {
     pushMatrix();
     translate(x, y);

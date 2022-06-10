@@ -1,5 +1,5 @@
 int MODE;
-final float GRAVITY = 0.25;
+final float GRAVITY = 0.5;
 float GRAVITY_ACC;
 color currentCol;
 float curWeight;
@@ -10,8 +10,6 @@ ArrayList<colorBlock> colors;
 float scale = 1;
 boolean paused;
 boolean zoom = false;
-    int xShift = 0, yShift = 0;
-
 /*
   NOTES:
  modes go [0,1,2] -> draw, play, erase
@@ -36,52 +34,33 @@ void setup() {
 void draw() {
   background(255);
   if (MODE == 0) {    
-    if (mousePressed == true) {
-      if (keyPressed) {
-        xShift += (mouseX-pmouseX);
-        yShift += (mouseY-pmouseY);
-      } else {
-        lines.add(new Segment(mouseX-xShift, mouseY-yShift, pmouseX-xShift, pmouseY-yShift, currentCol, curWeight));
+    if (keyPressed == true) {
+      if (keyCode == 65 && mousePressed) {
+        text("hallo", 20, 70);
       }
     }
-    for (colorBlock a : colors) {
-      a.display();
+    else if (mousePressed == true) {
+      lines.add(new Segment(mouseX, mouseY, pmouseX, pmouseY, currentCol, curWeight));
     }
-    translate(xShift,yShift);
-    lines.display();
   } else if (MODE == 1) {
     if (!paused) {
       current.move();
     }
     if (zoom) {
-      scale = 3.0;
+      scale = 5.0;
       display(scale);
     } else {
       current.display();
       lines.display();
     }
-    text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 60);
-    text("yForce : " + current.yForce, 20, 80);
-    text("xForce : " + current.xForce, 20, 100);
-    text("Force : " + current.force, 20, 120);
-    text("Normal Force : " + current.normalForce, 20, 140);
-
-    if (current.platform != null) {
-      text("slope : " + current.platform.getSlope(), 20, 160);
-    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
-      if (keyPressed) {
-        xShift += (mouseX-pmouseX);
-        yShift += (mouseY-pmouseY);
-      } else if (lines.getSegment(pmouseX-xShift, pmouseY-yShift) != null) {
-        lines.delete(lines.getSegment(pmouseX-xShift, pmouseY-yShift));
+      if (lines.getSegment(pmouseX, pmouseY) != null) {
+        lines.delete(lines.getSegment(pmouseX, pmouseY));
       }
     }
-    for (colorBlock a : colors) {
-      a.display();
-    }
-    translate(xShift,yShift);
+  }
+  if (MODE != 1) {
     lines.display();
   }
   String mo = "Mode : ";
@@ -98,6 +77,9 @@ void draw() {
   fill(0);
   text(mo, 20, 20);
   text("Weight: " + curWeight, 20, 30);
+  for (colorBlock a : colors) {
+    a.display();
+  }
   //lines.testing();
 }
 
