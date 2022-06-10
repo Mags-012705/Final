@@ -56,6 +56,8 @@ void draw() {
     
     if (current.platform != null){
       text("slope : " + current.platform.getSlope(), 20, 160);
+      text("sin : " + sin(current.angle), 20, 180);
+      text("cos : " + cos(current.angle), 20, 200);
     }
   } else if (MODE == 2) {
     if (mousePressed == true) {
