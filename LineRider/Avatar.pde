@@ -144,12 +144,12 @@ public class Avatar {
     while (current != null) {
       if (current.endX > current.startX) {
         if (current.getDistance(x,y) < high
-          && (x <= current.endX && x >= current.startX)) {
+          && (x <= current.endX-wide/2 && x >= current.startX+wide/2)) {
           return true;
         }
       } else if (current.endX < current.startX) {
         if (current.getDistance(x,y) < high
-          && (x >= current.endX && x <= current.startX)) {
+          && (x >= current.endX-wide/2 && x <= current.startX+wide/2)) {
           return true;
         }
       }
@@ -165,12 +165,12 @@ public class Avatar {
     while (current != null) {
       if (current.endX > current.startX) {
         if (current.getDistance(x,y) < high
-          && (x <= current.endX && x >= current.startX)) {
+          && (x <= current.endX-wide/2 && x >= current.startX+wide/2)) {
           return current;
         }
       } else if (current.endX < current.startX) {
         if (current.getDistance(x,y) < high
-          && (x >= current.endX && x <= current.startX)) {
+          && (x >= current.endX-wide/2 && x <= current.startX+wide/2)) {
           return current;
         }
       }
