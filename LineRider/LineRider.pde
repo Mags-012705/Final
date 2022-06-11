@@ -10,7 +10,7 @@ ArrayList<colorBlock> colors;
 float scale = 1;
 boolean paused;
 boolean zoom = false;
-    int xShift = 0, yShift = 0;
+int xShift = 0, yShift = 0;
 
 /*
   NOTES:
@@ -47,7 +47,7 @@ void draw() {
     for (colorBlock a : colors) {
       a.display();
     }
-    translate(xShift,yShift);
+    translate(xShift, yShift);
     lines.display();
   } else if (MODE == 1) {
     if (!paused) {
@@ -81,7 +81,7 @@ void draw() {
     for (colorBlock a : colors) {
       a.display();
     }
-    translate(xShift,yShift);
+    translate(xShift, yShift);
     lines.display();
   }
   String mo = "Mode : ";

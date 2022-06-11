@@ -47,7 +47,7 @@ public class Avatar {
         acceleration();
         forceProcessing();
         xAcceleration += xForce/mass;
-      }else{
+      } else {
         yForce = 0;
         yAcceleration = 0;
       }
@@ -143,12 +143,12 @@ public class Avatar {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if (current.getDistance(x,y) < high
+        if (current.getDistance(x, y) < high
           && (x <= current.endX-wide/2 && x >= current.startX+wide/2)) {
           return true;
         }
       } else if (current.endX < current.startX) {
-        if (current.getDistance(x,y) < high
+        if (current.getDistance(x, y) < high
           && (x >= current.endX-wide/2 && x <= current.startX+wide/2)) {
           return true;
         }
@@ -164,12 +164,12 @@ public class Avatar {
     Segment current = segments.start;
     while (current != null) {
       if (current.endX > current.startX) {
-        if (current.getDistance(x,y) < high
+        if (current.getDistance(x, y) < high
           && (x <= current.endX-wide/2 && x >= current.startX+wide/2)) {
           return current;
         }
       } else if (current.endX < current.startX) {
-        if (current.getDistance(x,y) < high
+        if (current.getDistance(x, y) < high
           && (x >= current.endX-wide/2 && x <= current.startX+wide/2)) {
           return current;
         }
@@ -184,47 +184,47 @@ public class Avatar {
   //}
   /*
   boolean isOnSegment(SegmentList segments) {
-    Segment current = segments.start;
-    Segment closest = segments.start;
-    while (current != null) {
-      if (current.endX > current.startX) {
-        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      } else if (current.endX < current.startX && x >= current.endX) {
-        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      }
-      current = current.next;
-    }
-    if (closest.getDistance(x, y) <= high) {
-      return true;
-    }
-    return false;
-  }
-
-  Segment getSegment(SegmentList segments) {
-    Segment current = segments.start;
-    Segment closest = segments.start;
-    while (current != null) {
-      if (current.endX > current.startX) {
-        if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      } else if (current.endX < current.startX && x >= current.endX) {
-        if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-          closest = current;
-        }
-      }
-      current = current.next;
-    }
-    if (closest.getDistance(x, y) <= high) {
-      return closest;
-    }
-    return null;
-  }
-  */
+   Segment current = segments.start;
+   Segment closest = segments.start;
+   while (current != null) {
+   if (current.endX > current.startX) {
+   if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+   closest = current;
+   }
+   } else if (current.endX < current.startX && x >= current.endX) {
+   if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+   closest = current;
+   }
+   }
+   current = current.next;
+   }
+   if (closest.getDistance(x, y) <= high) {
+   return true;
+   }
+   return false;
+   }
+   
+   Segment getSegment(SegmentList segments) {
+   Segment current = segments.start;
+   Segment closest = segments.start;
+   while (current != null) {
+   if (current.endX > current.startX) {
+   if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+   closest = current;
+   }
+   } else if (current.endX < current.startX && x >= current.endX) {
+   if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
+   closest = current;
+   }
+   }
+   current = current.next;
+   }
+   if (closest.getDistance(x, y) <= high) {
+   return closest;
+   }
+   return null;
+   }
+   */
 
   public void display() {
     pushMatrix();
