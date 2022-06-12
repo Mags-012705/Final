@@ -60,11 +60,11 @@ void draw() {
       current.display();
       lines.display();
     }
-    text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 60);
-    text("yForce : " + current.yForce, 20, 80);
-    text("xForce : " + current.xForce, 20, 100);
-    text("Force : " + current.force, 20, 120);
-    text("Normal Force : " + current.normalForce, 20, 140);
+    //text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 60);
+    //text("yForce : " + current.yForce, 20, 80);
+    //text("xForce : " + current.xForce, 20, 100);
+    //text("Force : " + current.force, 20, 120);
+    //text("Normal Force : " + current.normalForce, 20, 140);
 
     if (current.platform != null) {
       text("slope : " + current.platform.getSlope(), 20, 160);
@@ -94,10 +94,22 @@ void draw() {
   } else if (MODE == 3) {
     mo += "Paused";
   }
-  text("Zoom: " + zoom, 20, 40);
+  text("Zoom: " + zoom, 200, 40);
   fill(0);
-  text(mo, 20, 20);
-  text("Weight: " + curWeight, 20, 30);
+  text(mo, 200, 20);
+  text("Weight: " + curWeight, 200, 30);
+  PImage playButton = loadImage("play.png");
+  playButton.resize(30, 30);
+  image(playButton, 10-xShift, 10-yShift);
+  PImage paintButton = loadImage("paint.png");
+  paintButton.resize(30,30);
+  image(paintButton,65-xShift,10-yShift);
+  PImage eraseButton = loadImage("erase.png");
+  eraseButton.resize(40,30);
+  image(eraseButton,110-xShift,10-yShift);
+  PImage resetButton = loadImage("pause.png");
+  resetButton.resize(30,30);
+  image(resetButton,160-xShift,10-yShift);
   //lines.testing();
 }
 
@@ -144,6 +156,28 @@ void mouseClicked() {
     if (mouseX >= a.x-a.size && mouseX <= a.x+a.size &&
       mouseY >= a.y-a.size && mouseY <= a.y+a.size) {
       currentCol = a.getCol();
+    }
+  }
+  if (sqrt((mouseX-25-xShift)*(mouseX-25-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+    if (MODE != 1) {
+      MODE = 1;
+      PImage image = loadImage("Avatar.png");
+      image.resize(40, 38);
+      current = new Avatar(40, 40, image.width, image.height, image);
+    } else if (MODE == 1) {
+      paused = !paused;
+    }
+  }
+  if (sqrt((mouseX-80-xShift)*(mouseX-80-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+    text("Draw",10,100);
+    MODE = 0;
+  }
+  if (sqrt((mouseX-130-xShift)*(mouseX-130-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 20) {
+    MODE = 2;
+  }
+  if (sqrt((mouseX-175-xShift)*(mouseX-175-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+    if (MODE == 1) {
+      MODE = 0;
     }
   }
 }
