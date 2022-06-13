@@ -45,38 +45,14 @@ public class Segment {
     return (float)myColor * 0.1;
   }
 
-  int getStartX() {
-    return startX;
-  }
-
-  int getStartY() {
-    return startY;
-  }
-  int getEndX() {
-    return endX;
-  }
-
-  int getEndY() {
-    return endY;
-  }
-
   float getSlope() {
     return 5 * slope;
   }
-  float getB() {
-    return b;
-  }
-
 
   void display() {
     stroke(myColor);
     strokeWeight(weight);
     line(startX, startY, endX, endY);
-  }
-
-
-  void testing(int x, int y) {
-    text("equation: " + this.A +"x " + this.B+"y " + this.C, x, 40+y);
   }
 
   float getAngle() {
