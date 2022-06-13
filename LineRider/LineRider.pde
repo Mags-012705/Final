@@ -12,11 +12,6 @@ boolean paused;
 boolean zoom = false;
 int xShift = 0, yShift = 0;
 
-/*
-  NOTES:
- modes go [0,1,2] -> draw, play, erase
- */
-
 void setup() {
   size(1500, 1000);
   background(255);
@@ -60,15 +55,6 @@ void draw() {
       current.display();
       lines.display();
     }
-    //text("Angle : " + degrees(current.angle) + " : " + current.angle, 20, 60);
-    //text("yForce : " + current.yForce, 20, 80);
-    //text("xForce : " + current.xForce, 20, 100);
-    //text("Force : " + current.force, 20, 120);
-    //text("Normal Force : " + current.normalForce, 20, 140);
-
-    if (current.platform != null) {
-      text("slope : " + current.platform.getSlope(), 20, 160);
-    }
   } else if (MODE == 2) {
     if (mousePressed == true) {
       if (keyPressed) {
@@ -102,18 +88,17 @@ void draw() {
   playButton.resize(30, 30);
   image(playButton, 10-xShift, 10-yShift);
   PImage paintButton = loadImage("paint.png");
-  paintButton.resize(30,30);
-  image(paintButton,65-xShift,10-yShift);
+  paintButton.resize(30, 30);
+  image(paintButton, 65-xShift, 10-yShift);
   PImage eraseButton = loadImage("erase.png");
-  eraseButton.resize(40,30);
-  image(eraseButton,110-xShift,10-yShift);
+  eraseButton.resize(40, 30);
+  image(eraseButton, 110-xShift, 10-yShift);
   PImage resetButton = loadImage("pause.png");
-  resetButton.resize(30,30);
-  image(resetButton,160-xShift,10-yShift);
+  resetButton.resize(30, 30);
+  image(resetButton, 160-xShift, 10-yShift);
   PImage clearButton = loadImage("clear.png");
-  clearButton.resize(30,30);
-  image(clearButton,200-xShift,10-yShift);
-  //lines.testing();
+  clearButton.resize(30, 30);
+  image(clearButton, 200-xShift, 10-yShift);
 }
 
 
@@ -142,8 +127,6 @@ void keyPressed() {
   }
 }
 
-void erase() {
-}
 
 void mouseClicked() {
   for (colorBlock a : colors) {

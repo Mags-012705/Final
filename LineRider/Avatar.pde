@@ -28,7 +28,6 @@ public class Avatar {
     xAcceleration = 0.25;
     yForce = mass * GRAVITY;
     yAcceleration = yForce/mass;
-    //yAcceleration = -GRAVITY * mass;
     force = mass * (sqrt(sq(xAcceleration) + sq(yAcceleration)));
     normalForce = mass * GRAVITY;
     xForce = xAcceleration * mass;
@@ -56,8 +55,6 @@ public class Avatar {
     }
     x += xAcceleration;
     y += yAcceleration;
-
-    //Apply grav here for now (for testing)
   }
 
   //THE PHYSICS FORCES IS APPLIED HERE=================================
@@ -103,17 +100,7 @@ public class Avatar {
       normalForce = mass * GRAVITY;
     }
   }
-
-  /*private void beforePhys(){
-   if (angle >= 0){
-   normalForce = (mass * GRAVITY) - (force * sin(angle));
-   }else{
-   normalForce = (mass * GRAVITY) + (force * sin(angle));
-   }
-   }*/
-
-
-  //REDO X AND Y FORCE CALCS TO FIT NEW ANGLES
+  
   private void forceProcessing() {
     if (angle >=0) {
       xForce = cos(angle) * force;
@@ -178,53 +165,6 @@ public class Avatar {
     }
     return null;
   }
-
-  //void display() {
-  //  ellipse(x, y, 5, 5);
-  //}
-  /*
-  boolean isOnSegment(SegmentList segments) {
-   Segment current = segments.start;
-   Segment closest = segments.start;
-   while (current != null) {
-   if (current.endX > current.startX) {
-   if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-   closest = current;
-   }
-   } else if (current.endX < current.startX && x >= current.endX) {
-   if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-   closest = current;
-   }
-   }
-   current = current.next;
-   }
-   if (closest.getDistance(x, y) <= high) {
-   return true;
-   }
-   return false;
-   }
-   
-   Segment getSegment(SegmentList segments) {
-   Segment current = segments.start;
-   Segment closest = segments.start;
-   while (current != null) {
-   if (current.endX > current.startX) {
-   if (x <= current.endX && x >= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-   closest = current;
-   }
-   } else if (current.endX < current.startX && x >= current.endX) {
-   if (x <= current.startX && current.getDistance(x, y) < closest.getDistance(x, y)) {
-   closest = current;
-   }
-   }
-   current = current.next;
-   }
-   if (closest.getDistance(x, y) <= high) {
-   return closest;
-   }
-   return null;
-   }
-   */
 
   public void display() {
     pushMatrix();
