@@ -29,13 +29,20 @@ public class Segment {
   }
 
   float getCoeff() {
-    //if (red(myColor) == 230 && green(myColor) == 11) {
-    //  return 0.001;
-    //} else if (red(myColor) == 230) {
-    //  return 0.0001;
-    //}
-    //return (float)myColor * 0.1;
-    return 0.01;
+    if (red(myColor) == 230 && green(myColor) == 11) {
+      return 0.001;
+    } else if (red(myColor) == 230) {
+      return 0.003;
+    } else if (red(myColor) == 226) {
+      return 0.005;
+    } else if (red(myColor) == 11) {
+      return 0.007;
+    } else if (red(myColor) == 26) {
+      return 0.01;
+    } else if (red(myColor) == 126) {
+      return 0.013;
+    }
+    return (float)myColor * 0.1;
   }
 
   int getStartX() {
