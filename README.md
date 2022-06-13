@@ -26,12 +26,15 @@ Julia: Created Final Project document to jot down ideas. Outlined most of the id
 
 ## May 22
 Julia: Created prototype document and transferred relevant information from final project document onto it. Also created UML diagram.
+Maggie: Caught up with doc. Ideas discussion with Julia. Edits on actual plan of action.
 
 ## May 23
 Julia: Worked on branching and merging and worked on line drawing for the project.
+Maggie: studied merging and branching. Tested out some continuous lines and how they work.
 
 ## May 24
 Julia: Created Segment class and changed up variables as well as function names to operate as needed. Also created the SegmentList class to hold all visible segments. Should have basic functionality working so that it can be implemented as needed into the game.
+Maggie: Created Avatar and main class. Mode toggling & basic avatar movement (gravity) is done. Some changes to variable names.
 
 ## May 25
 Julia: Drawing is working now and extra features such as weight of the line should work.
