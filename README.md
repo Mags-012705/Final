@@ -3,6 +3,22 @@ It's the Final (Countdown).
 Initial Prototype: https://docs.google.com/document/d/19dUgJ65T11RnqAKPeEgb40M6vEFdX2ab7fQNVNGsIK0/edit?usp=sharing
 Final Prototype:
 
+# Compile and Run Instructions
+You will begin the game in paint mode where you are able to create the map for line rider. 
+
+## Paint Mode
+You can expand the map simply by dragging your mouse to the left or right on the screen while also pressing a key that is not one of the following: 1-9, Z, or spacebar. Pressing 1-9 will change the thickness of the line that you are drawing.
+From here, you can press the play button to change to playing mode, the erase button to change to erase mode, or C button to clear the screen. 
+You can click on one of the colored boxed on the right of the screen to change the color of your pen.
+
+## Play Mode
+The avatar, the sled, will drop from the top of the screen. From here, the sled should follow the movement of the lines that it comes into contact with. You can toggle between whether or not you want to zoom in and follow the sled by pressing the Z key. Note that when zoomed in, you will not be able to view the buttons on the top right of the screen, so if you wish to access those buttons, you must toggle out of zooming. Also note that when you stop zooming in, you will no longer be following the sled's movement across the screen and will default back to where the screen was when you began play mode.
+While in this mode, you can press the play button again to pause the movement of the sled. Note that you cannot access any of draw or erase's functionality while in play mode, even if you are paused. You can click the black square button to reset the game back to draw mode. If you click the paint icon, you will exit play mode and go to paint mode while retaining all your current lines. If you click the erase icon, you will exit play mode and enter erase mode with your current lines.
+
+## Erase Mode
+While in erase mode, you will be able to erase lines either by clicking your mouse on top of a line or dragging it across the screen to erase all lines that make contact with your mouse. Note that you will be erasing entire line segments in this mode. 
+You can click on the C button to clear all lines. You can click on the play button to go back into play mode with the current map. Clicking on the paint button will put you in paint mode with all the current lines as well. 
+
 # Development Log
 
 ## May 21
