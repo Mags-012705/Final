@@ -1,7 +1,7 @@
 # Final
-It's the Final (Countdown).
-Initial Prototype: https://docs.google.com/document/d/19dUgJ65T11RnqAKPeEgb40M6vEFdX2ab7fQNVNGsIK0/edit?usp=sharing
-Final Prototype:
+It's the Final (Countdown).  
+Initial Prototype: https://docs.google.com/document/d/19dUgJ65T11RnqAKPeEgb40M6vEFdX2ab7fQNVNGsIK0/edit?usp=sharing  
+Final Prototype: https://docs.google.com/document/d/183SszBrw4eXy1GHYJfT3uPC-GJpeSoFm_8oi-gI_BB0/edit?usp=sharing
 
 # Compile and Run Instructions
 You will begin the game in paint mode where you are able to create the map for line rider. 
