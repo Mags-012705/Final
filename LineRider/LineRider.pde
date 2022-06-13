@@ -94,10 +94,10 @@ void draw() {
   } else if (MODE == 3) {
     mo += "Paused";
   }
-  text("Zoom: " + zoom, 200, 40);
+  text("Zoom: " + zoom, 300, 40);
   fill(0);
-  text(mo, 200, 20);
-  text("Weight: " + curWeight, 200, 30);
+  text(mo, 300, 20);
+  text("Weight: " + curWeight, 300, 30);
   PImage playButton = loadImage("play.png");
   playButton.resize(30, 30);
   image(playButton, 10-xShift, 10-yShift);
@@ -110,6 +110,9 @@ void draw() {
   PImage resetButton = loadImage("pause.png");
   resetButton.resize(30,30);
   image(resetButton,160-xShift,10-yShift);
+  PImage clearButton = loadImage("clear.png");
+  clearButton.resize(30,30);
+  image(clearButton,200-xShift,10-yShift);
   //lines.testing();
 }
 
@@ -134,15 +137,6 @@ void keyPressed() {
   if (keyCode >= 49 && keyCode <= 57) {
     curWeight = keyCode - 48;
   }
-
-  if (key == BACKSPACE) {
-    lines = new SegmentList();
-  }
-
-  if (keyCode == 80) {
-    paused = !paused;
-  }
-
   if (keyCode == 90) {
     zoom = !zoom;
   }
@@ -183,6 +177,11 @@ void mouseClicked() {
       xShift = 0;
       yShift = 0;
       MODE = 0;
+    }
+  }
+  if (sqrt((mouseX-215)*(mouseX-215)+(mouseY-25)*(mouseY-25)) <= 15) {
+    if (MODE == 0) {
+      lines = new SegmentList();
     }
   }
 }
