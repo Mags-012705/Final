@@ -160,6 +160,8 @@ void mouseClicked() {
   }
   if (sqrt((mouseX-25-xShift)*(mouseX-25-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
     if (MODE != 1) {
+      xShift = 0;
+      yShift = 0;
       MODE = 1;
       PImage image = loadImage("Avatar.png");
       image.resize(40, 38);
@@ -169,7 +171,8 @@ void mouseClicked() {
     }
   }
   if (sqrt((mouseX-80-xShift)*(mouseX-80-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
-    text("Draw",10,100);
+    xShift = 0;
+    yShift = 0;
     MODE = 0;
   }
   if (sqrt((mouseX-130-xShift)*(mouseX-130-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 20) {
@@ -177,6 +180,8 @@ void mouseClicked() {
   }
   if (sqrt((mouseX-175-xShift)*(mouseX-175-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
     if (MODE == 1) {
+      xShift = 0;
+      yShift = 0;
       MODE = 0;
     }
   }
