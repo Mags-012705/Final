@@ -158,7 +158,7 @@ void mouseClicked() {
       currentCol = a.getCol();
     }
   }
-  if (sqrt((mouseX-25-xShift)*(mouseX-25-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+  if (sqrt((mouseX-25)*(mouseX-25)+(mouseY-25)*(mouseY-25)) <= 15) {
     if (MODE != 1) {
       xShift = 0;
       yShift = 0;
@@ -170,15 +170,15 @@ void mouseClicked() {
       paused = !paused;
     }
   }
-  if (sqrt((mouseX-80-xShift)*(mouseX-80-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+  if (sqrt((mouseX-80)*(mouseX-80)+(mouseY-25)*(mouseY-25)) <= 15) {
     xShift = 0;
     yShift = 0;
     MODE = 0;
   }
-  if (sqrt((mouseX-130-xShift)*(mouseX-130-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 20) {
+  if (sqrt((mouseX-130)*(mouseX-130)+(mouseY-25)*(mouseY-25)) <= 20) {
     MODE = 2;
   }
-  if (sqrt((mouseX-175-xShift)*(mouseX-175-xShift)+(mouseY-25-yShift)*(mouseY-25-yShift)) <= 15) {
+  if (sqrt((mouseX-175)*(mouseX-175)+(mouseY-25)*(mouseY-25)) <= 15) {
     if (MODE == 1) {
       xShift = 0;
       yShift = 0;
