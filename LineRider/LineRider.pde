@@ -170,17 +170,20 @@ void mouseClicked() {
     MODE = 0;
   }
   if (sqrt((mouseX-130)*(mouseX-130)+(mouseY-25)*(mouseY-25)) <= 20) {
+    paused = false;
     MODE = 2;
   }
   if (sqrt((mouseX-175)*(mouseX-175)+(mouseY-25)*(mouseY-25)) <= 15) {
     if (MODE == 1) {
       xShift = 0;
       yShift = 0;
+      paused = false;
+      lines = new SegmentList();
       MODE = 0;
     }
   }
   if (sqrt((mouseX-215)*(mouseX-215)+(mouseY-25)*(mouseY-25)) <= 15) {
-    if (MODE == 0) {
+    if (MODE == 0 || MODE == 3) {
       lines = new SegmentList();
     }
   }
